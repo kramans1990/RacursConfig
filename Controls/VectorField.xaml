@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="RacursConfig.Controls.VectorField"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RacursConfig.Controls"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>           
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="textValidateBlock" Grid.RowSpan="1" Grid.ColumnSpan ="7"></TextBlock>
+
+        <TextBlock Grid.Column="0">X:</TextBlock>
+        <local:NumberField Text="{Binding Matrix.N11}" Grid.Column="1"  x:Name="X"></local:NumberField>
+        <TextBlock  Grid.Column="2">Y:</TextBlock>
+        <local:NumberField Text="{Binding Matrix.N21}" Grid.Column="3"  x:Name="Y"></local:NumberField>
+        <TextBlock  Grid.Column="4">Z:</TextBlock>
+        <local:NumberField Text="{Binding Matrix.N31}" Grid.Column="5"  x:Name="Z"></local:NumberField>      
+    </Grid>
+</UserControl>

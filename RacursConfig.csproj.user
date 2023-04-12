@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Controls\AttitudeField.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\MatrixField.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\NumberField.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\TextField.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\VectorField.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MagnetometersPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\StationsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\AttitudeField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\MatrixField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\NumberField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\TextField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\VectorField.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ElMagnetPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\MagnetometersPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\StationsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
