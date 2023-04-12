@@ -13,18 +13,18 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using RacursConfig.Controls;
 using System.Collections.ObjectModel;
-using RacursLib.LibMath;
+using Vector = RacursCore.types.Vector;
 
 namespace RacursConfig.PagesVM
 {
-    class MagnetometersPageVM :BaseVM
+    class ArsPageVM :BaseVM
     {
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/Magnetometers";      
+        private string route = "/api/ARS";      
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
-        private string getMessage = " Запрос списка электромагнитов";
+        private string getMessage = " Запрос списка ДУС";
         private string editMessage = " Запись успешно изменена";
         private JsonSerializerOptions options;
 
@@ -37,75 +37,48 @@ namespace RacursConfig.PagesVM
         }
      
 
-        private List<Magnetometer> _Magnetometers;
-        public List<Magnetometer> Magnetometers
+        private List<ARS> _ARSes;
+        public List<ARS> ARSes
         {
             get
             {
-                return _Magnetometers;
+                return _ARSes;
             }
             set
             {
-                _Magnetometers = value;
-                OnPropertyChanged(nameof(Magnetometers));
+                _ARSes = value;
+                OnPropertyChanged(nameof(ARSes));
             }
         }
 
-        private Magnetometer _SelectedMagnetometer;
-        public Magnetometer SelectedMagnetometer
+        private ARS _SelectedARS;
+        public ARS SelectedARS
         {
             get
             {
-                return _SelectedMagnetometer;
+                return _SelectedARS;
             }
             set
             {
-                _SelectedMagnetometer = value;
-                OnPropertyChanged(nameof(SelectedMagnetometer));
+                _SelectedARS = value;
+                OnPropertyChanged(nameof(SelectedARS));
             }
         }
 
-        private Magnetometer _MagnetometerEditor;
-        public Magnetometer MagnetometerEditor
+        private ARS _ARSEditor;
+        public ARS ARSEditor
         {
             get
             {
-                return _MagnetometerEditor;
+                return _ARSEditor;
             }
             set
             {
-                _MagnetometerEditor = value;
-                OnPropertyChanged(nameof(MagnetometerEditor));
+                _ARSEditor = value;
+                OnPropertyChanged(nameof(ARSEditor));
             }
         }
 
-        private Matrix3 _Attm;
-        public Matrix3 Attm
-        {
-            get
-            {
-                return _Attm;
-            }
-            set
-            {
-                _Attm = value;
-                OnPropertyChanged(nameof(Attm));
-            }
-        }
-
-        private Matrix3 _Skew;
-        public Matrix3 Skew
-        {
-            get
-            {
-                return _Skew;
-            }
-            set
-            {
-                _Skew = value;
-                OnPropertyChanged(nameof(Skew));
-            }
-        }
 
         private Attitude _Att;
         public Attitude Att
@@ -120,20 +93,32 @@ namespace RacursConfig.PagesVM
                 OnPropertyChanged(nameof(Att));
             }
         }
+        private Vector _Axis;
+        public Vector Axis
+        {
+            get
+            {
+                return _Axis;
+            }
+            set
+            {
+                _Axis = value;
+                OnPropertyChanged(nameof(Axis));
+            }
+        }
 
-       
 
-        public MagnetometersPageVM() {
+        public ArsPageVM() {
             EditorVisibility = Visibility.Hidden;
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(App.baseUrl);
-            getMagnetometers();
-            SelectedMagnetometer = new Magnetometer();           
+            getARSs();
+            SelectedARS = new ARS();           
             AddCommand = new RelayCommand(x => Add());
             CancelCommand = new RelayCommand(x => Cancel());
             DeleteCommand = new RelayCommand(x => Delete(x));
             SaveCommand = new RelayCommand(x => Save(),p=>canSave());
-            MagnetometerEditor = new Magnetometer();
+            ARSEditor = new ARS();
             EditCommand = new RelayCommand(x => Edit(x));
             Messages = new ObservableCollection<string>();
             options = new JsonSerializerOptions
@@ -162,15 +147,13 @@ namespace RacursConfig.PagesVM
             return resultText;
         }
 
-        private void Edit(object magnetometer)
+        private void Edit(object ARS)
         {
-            
-            // Magnetometers = JsonSerializer.Deserialize<Magnetometer>(result.Result, options);
-            string s = JsonConvert.SerializeObject(magnetometer);
-            MagnetometerEditor = JsonSerializer.Deserialize<Magnetometer>(s, options);
-            Att = MagnetometerEditor.Att;
-            Attm = MagnetometerEditor.Attm;
-            Skew = MagnetometerEditor.Skew;
+           
+            string s = JsonConvert.SerializeObject(ARS);
+            ARSEditor = JsonSerializer.Deserialize<ARS>(s, options);
+            Att = ARSEditor.Att;
+            Axis = ARSEditor.Axis;
             EditorVisibility = Visibility.Visible;
             mode = "Edit";          
 
@@ -184,36 +167,35 @@ namespace RacursConfig.PagesVM
         {
             if (mode == "Add")
             {
-                AddMagnetometerToDataBase(MagnetometerEditor);
+                AddARSToDataBase(ARSEditor);
             }
             if (mode == "Edit")
             {
-                EditMagnetometer(MagnetometerEditor);
+                EditARS(ARSEditor);
             }
         }
         private void Add()
         {   
             EditorVisibility = Visibility.Visible;
             mode = "Add";
-            Attm = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Skew = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
+            Axis = new Vector(0,0,0);
             Att = new Attitude(0, 0, 0, 0);
-            MagnetometerEditor = new Magnetometer();
+            ARSEditor = new ARS();
           
         }
-        private async void Delete(object magnetometer)
+        private async void Delete(object ARS)
         {
             EditorVisibility = Visibility.Hidden;
             try
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, route);
-                string content = JsonConvert.SerializeObject(magnetometer);
+                string content = JsonConvert.SerializeObject(ARS);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     Messages.Add(GetTimeLabel() + deleteMessage);
-                    getMagnetometers();
+                    getARSs();
 
                 }
                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
@@ -223,22 +205,21 @@ namespace RacursConfig.PagesVM
                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void EditMagnetometer(Magnetometer magnetometer)
+        private async void EditARS(ARS ARS)
         {
             try
             {   
-                magnetometer.Att = Att;
-                magnetometer.Attm=Attm;
-                magnetometer.Skew = Skew;
+                ARS.Att = Att;
+                ARS.Axis = Axis;
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, route);
-                string content = JsonConvert.SerializeObject(magnetometer);
+                string content = JsonConvert.SerializeObject(ARS);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     EditorVisibility = Visibility.Hidden;
                     Messages.Add(GetTimeLabel() + editMessage);
-                    getMagnetometers();
+                    getARSs();
 
                 }
                else {Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
@@ -248,7 +229,7 @@ namespace RacursConfig.PagesVM
                     Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void getMagnetometers()
+        private async void getARSs()
         {
             try
             {
@@ -257,7 +238,7 @@ namespace RacursConfig.PagesVM
                 {
                     var result = response.Content.ReadAsStringAsync();
                     Messages.Add(GetTimeLabel() + getMessage);                  
-                    Magnetometers = JsonSerializer.Deserialize<List<Magnetometer>>(result.Result,options);                    
+                    ARSes = JsonSerializer.Deserialize<List<ARS>>(result.Result,options);                    
                 }
               else { Messages.Add(response.ReasonPhrase); }
             }
@@ -266,23 +247,23 @@ namespace RacursConfig.PagesVM
                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void AddMagnetometerToDataBase(Magnetometer magnetometer)
+        private async void AddARSToDataBase(ARS ARS)
         {
             try
             {
-                magnetometer.Skew = Skew;
-                magnetometer.Attm = Attm;
-                magnetometer.Att = Att;
-                string content = JsonConvert.SerializeObject(magnetometer);
-                //content = System.Text.Json.JsonSerializer.Serialize(magnetometer);
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/magnetometers");
+               
+                ARS.Axis = Axis;
+                ARS.Att = Att;
+                string content = JsonConvert.SerializeObject(ARS);
+                //content = System.Text.Json.JsonSerializer.Serialize(ARS);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, route);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     EditorVisibility = Visibility.Hidden;
                     Messages.Add(GetTimeLabel() + addMessage);
-                    getMagnetometers();
+                    getARSs();
 
                 }
                 else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }

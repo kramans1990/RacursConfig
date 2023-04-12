@@ -22,6 +22,9 @@
     <Compile Update="Controls\VectorField.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ARSPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MagnetometersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +49,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ARSPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ElMagnetPage.xaml">

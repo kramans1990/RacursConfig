@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RacursLib.LibMath;
+using Matrix3 = RacursLib.LibMath.Matrix3;
 
 namespace RacursConfig.types
 {
@@ -18,11 +20,11 @@ namespace RacursConfig.types
             /// ориентация магнитометра относительно корпуса КА (кватернион- вектор4(x,y,z,w))
             /// </summary>
           
-            private Attitude Att { get; set; }
+            public Attitude Att { get; set; }
             
 
          
-            private Matrix3 Attm { get; set; }
+            public Matrix3 Attm { get; set; }
             
 
 
