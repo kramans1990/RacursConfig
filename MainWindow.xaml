@@ -27,6 +27,8 @@
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ElMagnetsPageCommand}"  Content=" Электромагниты  "></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding MagnetometersPageCommand}"  Content=" Магнитометры  " Cursor="Hand"></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ARSPageCommand}"  Content=" ДУС  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding FlyWheelCommand}"  Content=" Маховики  " Cursor="Hand"></Button>
+            
         </StackPanel>
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="DarkGray" Margin="2" >
             <Frame  NavigationUIVisibility="Hidden" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>

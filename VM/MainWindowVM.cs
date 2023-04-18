@@ -41,6 +41,7 @@ namespace RacursConfig
 
         public RelayCommand MagnetometersPageCommand => new RelayCommand(x => { CurrentPage = new MagnetometersPage(); });
         public RelayCommand ARSPageCommand => new RelayCommand(x => { CurrentPage = new ARSPage(); });
+        public RelayCommand FlyWheelCommand => new RelayCommand(x => { CurrentPage = new FlyWheelPage(); });
         public MainWindowVM()
         {
            
