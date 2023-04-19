@@ -29,12 +29,7 @@ namespace RacursConfig.PagesVM
         private JsonSerializerOptions options;
 
 
-        private Page _Page;
-        public Page Page
-        {
-            get { return _Page; }
-            set { _Page = value; OnPropertyChanged(nameof(Page)); }
-        }
+     
      
 
         private List<Flywheel> _Flywheels;

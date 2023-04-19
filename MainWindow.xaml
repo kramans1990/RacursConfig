@@ -24,7 +24,7 @@
         
         <StackPanel Orientation="Horizontal">            
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding StationsPageCommand}"  Content=" Станции  "></Button>
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ElMagnetsPageCommand}"  Content=" Электромагниты  "></Button>
+            <Button Style="{StaticResource button-primary}" Width="160" Margin="2,2,1,0"  Command="{Binding ElMagnetsPageCommand}"  Content=" Электромагниты  "></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding MagnetometersPageCommand}"  Content=" Магнитометры  " Cursor="Hand"></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ARSPageCommand}"  Content=" ДУС  " Cursor="Hand"></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding FlyWheelPageCommand}"  Content=" Маховики  " Cursor="Hand"></Button>

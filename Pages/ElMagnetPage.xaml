@@ -3,44 +3,46 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:RacursConfig.Pages"
+      xmlns:local="clr-namespace:RacursConfig.Pages" xmlns:controls="clr-namespace:RacursConfig.Controls"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="800"
-      Title="StationsPage">
-    <Page.Resources>
-        <Style TargetType="TextBlock">
-            <Setter Property="TextAlignment" Value="Left"></Setter>
-            <Setter Property="FontSize" Value="16"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+      Title="StationsPage"  Background="#EAEDF0"
+     >
 
+    <Page.Resources>
+        <Style TargetType="{x:Type controls:NumberField}">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
         </Style>
-      
+
     </Page.Resources>
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*" ></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="260" ></RowDefinition>
+            <RowDefinition Height="480" ></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0">Список Электромагнитов</Label>
-        <DataGrid Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedElMagnet}" ItemsSource="{Binding ElMagnets}">
-            <DataGrid.Columns>                
+
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список Маховиков</Label>
+        <GridSplitter Margin="0,30,0,0"></GridSplitter>
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedElMagnet}" ItemsSource="{Binding ElMagnets}">
+            <DataGrid.Columns>
                 <DataGridTextColumn Width="150" Header="Название" Binding="{Binding Name}" />
-                <DataGridTextColumn Width="150" Header="Описание" Binding="{Binding Description}"/>
-                <DataGridTextColumn Width="130" Header="AxisElmagnetX" Binding="{Binding AxisElmagnetX}"/>
-                <DataGridTextColumn Width="130" Header="AxisElmagnetY" Binding="{Binding AxisElmagnetY}"/>
-                <DataGridTextColumn Width="130" Header="AxisElmagnetZ" Binding="{Binding AxisElmagnetZ}"/>
-                <DataGridTextColumn Width="130" Header="ADCElmagnetBits" Binding="{Binding ADCElmagnetBits}"/>
-                <DataGridTextColumn Width="130" Header="SElmagnet" Binding="{Binding SElmagnet}" />
-                <DataGridTextColumn Width="130" Header="SElmagnetDrift" Binding="{Binding SElmagnetDrift}" />
-                <DataGridTextColumn Width="100" Header="RElmagnet" Binding="{Binding RElmagnet}"/>
-                <DataGridTextColumn Width="100" Header="LElmagnet" Binding="{Binding LElmagnet}"/>
-                <DataGridTextColumn Width="110" Header="CElmagnet" Binding="{Binding CElmagnet}"/>
-                <DataGridTextColumn Width="120" Header="PElmagnetMax" Binding="{Binding PElmagnetMax}"/>
-                <DataGridTextColumn Width="120" Header="UElmagnetMax" Binding="{Binding UElmagnetMax}"/>
-                <DataGridTextColumn Width="120" Header="IElmagnetMax" Binding="{Binding IElmagnetMax}"/>
+                <DataGridTextColumn Width="190" Header="Описание" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="100" Header="DACbits" Binding="{Binding DAC_bits}"/>
+                <DataGridTextColumn Width="100" Header="S" Binding="{Binding S}"/>
+                <DataGridTextColumn Width="100" Header="SDrift" Binding="{Binding S_drift}"/>
+                <DataGridTextColumn Width="100" Header="R" Binding="{Binding R}"/>
+                <DataGridTextColumn Width="100" Header="L" Binding="{Binding L}"/>
+                <DataGridTextColumn Width="100" Header="C" Binding="{Binding C}"/>
+                <DataGridTextColumn Width="100" Header="Rs" Binding="{Binding Rs}"/>
+                <DataGridTextColumn Width="100" Header="PMax" Binding="{Binding P_max}"/>
+                <DataGridTextColumn Width="100" Header="Umax" Binding="{Binding U_max}"/>
+                <DataGridTextColumn Width="100" Header="Imax" Binding="{Binding I_max}"/>
+              
                 <DataGridTemplateColumn Width="150" >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate>
@@ -64,80 +66,100 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Height="40" Orientation="Horizontal">
-            <Button Style="{StaticResource button-primary}" Grid.Row="1" Margin="47,0,2,2" Content="Добавить" Command="{Binding AddCommand}"></Button>          
-           
+            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="100" Margin="40,0,2,2" Content="Добавить" Command="{Binding AddCommand}"></Button>
+
         </StackPanel>
         <StackPanel Grid.Row="3">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Grid Visibility="{Binding EditorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="30"></ColumnDefinition>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                       
 
-            <Grid Visibility="{Binding EditorVisibility}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20"></ColumnDefinition>
-                    <ColumnDefinition Width="160"></ColumnDefinition>
-                    <ColumnDefinition Width="220"></ColumnDefinition>
-                    <ColumnDefinition Width="20"></ColumnDefinition>
-                    <ColumnDefinition Width="120"></ColumnDefinition>
-                    <ColumnDefinition Width="200"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="30"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Название"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Text="Описание"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="2" Text="AxisElmagnetX"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="AxisElmagnetY"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="4" Text="AxisElmagnetZ"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="5" Text="ADCElmagnetBits"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="6" Text="SElmagnet"></TextBlock>
-             
-                <TextBox Grid.Column="2" Grid.Row="0" Text="{Binding ElMagnetEditor.Name}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding ElMagnetEditor.Description}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding ElMagnetEditor.AxisElmagnetX}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding ElMagnetEditor.AxisElmagnetY}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="4" Text="{Binding ElMagnetEditor.AxisElmagnetZ}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="5" Text="{Binding ElMagnetEditor.ADCElmagnetBits}"></TextBox>
-                <TextBox Grid.Column="2" Grid.Row="6" Text="{Binding ElMagnetEditor.SElmagnet}"></TextBox>
-              
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
 
-
-                <TextBlock Grid.Column="4" Grid.Row="0" Text="SElmagnetDrift"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="1" Text="RElmagnet"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="2" Text="LElmagnet"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="3" Text="CElmagnet"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="4" Text="PElmagnetMax"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="5" Text="UElmagnetMax"></TextBlock>
-                <TextBlock Grid.Column="4" Grid.Row="6" Text="IElmagnetMax"></TextBlock>
-                <TextBox Grid.Column="5" Grid.Row="0" Text="{Binding ElMagnetEditor.SElmagnetDrift}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding ElMagnetEditor.RElmagnet}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="2" Text="{Binding ElMagnetEditor.LElmagnet}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="3" Text="{Binding ElMagnetEditor.CElmagnet}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="4" Text="{Binding ElMagnetEditor.PElmagnetMax}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="5" Text="{Binding ElMagnetEditor.UElmagnetMax}"></TextBox>
-                <TextBox Grid.Column="5" Grid.Row="6" Text="{Binding ElMagnetEditor.IElmagnetMax}"></TextBox>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Название"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Описание"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Axis"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="DAC_bits"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="S"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="S_drift"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="R"></TextBlock>
 
 
+                    <TextBlock Grid.Column="2" Grid.Row="3" Text="X:"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="3" Text="Y:"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="3" Text="Z:"></TextBlock>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="0" Text="{Binding ElMagnetEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="5" Grid.Row="1" Text="{Binding ElMagnetEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="3" Text="{Binding Path =Axis.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="3" Text="{Binding Path =Axis.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="3" Text="{Binding Path =Axis.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
 
-                <Button Grid.Row="7" Style="{StaticResource button-primary}"  Width ="100" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
-                <Button Grid.Row="7"  Style="{StaticResource button-primary}" Width ="100" Grid.Column="2" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
-            </Grid>
+                    <controls:NumberField Grid.Column="3" Grid.Row="4" Text="{Binding ElMagnetEditor.DAC_bits, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="5" Text="{Binding ElMagnetEditor.S,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="6" Text="{Binding ElMagnetEditor.S_drift,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="7" Text="{Binding ElMagnetEditor.R,Mode=TwoWay}"></controls:NumberField>
+
+
+
+
+                    <TextBlock Grid.Column="9" Grid.Row="1" Text="L"></TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="2" Text="C"></TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="3" Text="Rs"></TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="4" Text="P_max"></TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="5" Text="U_max"></TextBlock>
+                    <TextBlock Grid.Column="9" Grid.Row="6" Text="I_max"></TextBlock>
+
+                    <controls:NumberField Grid.Column="10" Grid.Row="1" Text="{Binding ElMagnetEditor.L,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="10" Grid.Row="2" Text="{Binding ElMagnetEditor.C, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="10" Grid.Row="3" Text="{Binding ElMagnetEditor.Rs,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="10" Grid.Row="4" Text="{Binding ElMagnetEditor.P_max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="10" Grid.Row="5" Text="{Binding ElMagnetEditor.U_max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="10" Grid.Row="6" Text="{Binding ElMagnetEditor.I_max,Mode=TwoWay}"></controls:NumberField>
+                  
+
+
+                    <Button Grid.Row="11" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+                    <Button Grid.Row="11"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="3" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
+                </Grid>
+            </ScrollViewer>
         </StackPanel>
-        <!--<ListBox Grid.Row="4">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
-        <TextBox  VerticalContentAlignment="Top" TextAlignment="Left" Grid.Row="4" Text="{Binding WarningMessages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+        <!--<TextBox  VerticalContentAlignment="Top" TextAlignment="Left" Grid.Row="4" Text="{Binding WarningMessages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>-->
+        <GridSplitter Margin="0,30,0,0" Grid.ColumnSpan="10"></GridSplitter>
+        <ScrollViewer Grid.Row="4">
+            <ItemsControl Background="White"   ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding}" FontSize="14" Foreground="Gray"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
-  
 
 </Page>

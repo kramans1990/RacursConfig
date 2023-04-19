@@ -1,25 +1,39 @@
 ﻿using Newtonsoft.Json;
-using RacursCore;
 using RacursCore.SatilliteComponents;
+using RacursCore.types;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Windows;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Text.Json;
+using System.Windows.Media;
+using System.Windows.Controls;
+using RacursConfig.Controls;
+using System.Collections.ObjectModel;
+using Vector = RacursCore.types.Vector;
 
 namespace RacursConfig.Pages
 {
     public class ElMagnetPageVM :BaseVM
     {
-       
-           
+
+
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/elmagnets";       
-        private string deleteMessage = " Запись успешно удалена\n";
-        private string addMessage = " Запись успешно добавлена\n";
-        private string getMessage = " Запрос списка электромагнитов\n";
-        private string editMessage = " Запись успешно изменена\n";
+        private string route = "/api/elmagnets";
+        private string deleteMessage = " Запись успешно удалена";
+        private string addMessage = " Запись успешно добавлена";
+        private string getMessage = " Запрос списка электромагнитов";
+        private string editMessage = " Запись успешно изменена";
+        private JsonSerializerOptions options;
+
+
+
+
+
         private List<ElMagnet> _ElMagnets;
         public List<ElMagnet> ElMagnets
         {
@@ -33,7 +47,7 @@ namespace RacursConfig.Pages
                 OnPropertyChanged(nameof(ElMagnets));
             }
         }
-      
+
         private ElMagnet _SelectedElMagnet;
         public ElMagnet SelectedElMagnet
         {
@@ -47,8 +61,6 @@ namespace RacursConfig.Pages
                 OnPropertyChanged(nameof(SelectedElMagnet));
             }
         }
-
-
 
         private ElMagnet _ElMagnetEditor;
         public ElMagnet ElMagnetEditor
@@ -64,60 +76,72 @@ namespace RacursConfig.Pages
             }
         }
 
-        //private Visibility _EditorVisibility;
-        //public Visibility EditorVisibility
-        //{
-        //    get
-        //    {
-        //        return _EditorVisibility;
-        //    }
-        //    set
-        //    {
-        //        _EditorVisibility = value;
-
-        //        OnPropertyChanged(nameof(EditorVisibility));
-        //    }
-        //}
-
+        private Vector _Axis;
+        public Vector Axis
+        {
+            get
+            {
+                return _Axis;
+            }
+            set
+            {
+                _Axis = value;
+                OnPropertyChanged(nameof(Axis));
+            }
+        }
 
 
-        //private string _WarningMessages;
-        //public string WarningMessages
-        //{
-        //    get
-        //    {
-        //        return _WarningMessages.ToString();
-        //    }
-        //    set
-        //    {
-        //        _WarningMessages = value;
-        //        OnPropertyChanged(nameof(WarningMessages));
-        //    }
-        //}
-
-       
         public ElMagnetPageVM()
         {
             EditorVisibility = Visibility.Hidden;
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(App.baseUrl);
-         
-            getElMagnets();
+            getFlyheels();
             SelectedElMagnet = new ElMagnet();
-            WarningMessages = new List<string>();
             AddCommand = new RelayCommand(x => Add());
             CancelCommand = new RelayCommand(x => Cancel());
             DeleteCommand = new RelayCommand(x => Delete(x));
-            SaveCommand = new RelayCommand(x => Save());
-            EditCommand = new RelayCommand(x => Edit());
-            ElMagnet elMagnet = new ElMagnet();
+            SaveCommand = new RelayCommand(x => Save(), p => canSave());
+            ElMagnetEditor = new ElMagnet();
+            EditCommand = new RelayCommand(x => Edit(x));
+            Messages = new ObservableCollection<string>();
+            options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
         }
 
-        private void Edit()
+        private bool canSave()
         {
-            ElMagnetEditor = JsonConvert.DeserializeObject<ElMagnet>(JsonConvert.SerializeObject(SelectedElMagnet));
+            DependencyObject do_ = (Application.Current.MainWindow);
+            var frame = FindVisualChildren<Frame>((do_));
+            List<NumberField> fieldsNum = FindVisualChildren<NumberField>(frame.First()).ToList<NumberField>();
+            var find_FalseNum = fieldsNum.Where(p => p.IsValid == false);
+            bool result = find_FalseNum.Count() == 0 ? true : false;
+
+            if (!result)
+            {
+                return result;
+            }
+
+            List<TextField> fieldsText = FindVisualChildren<TextField>(frame.First()).ToList<TextField>();
+            var find_FalseText = fieldsText.Where(p => p.IsValid == false);
+            bool resultText = find_FalseText.Count() == 0 ? true : false;
+
+            return resultText;
+        }
+
+        private void Edit(object wheel)
+        {
+
+            string s = JsonConvert.SerializeObject(wheel);
+            ElMagnetEditor = JsonSerializer.Deserialize<ElMagnet>(s, options);
+            Axis = ElMagnetEditor.Axis;
             EditorVisibility = Visibility.Visible;
             mode = "Edit";
+
+
         }
         private void Cancel()
         {
@@ -127,7 +151,7 @@ namespace RacursConfig.Pages
         {
             if (mode == "Add")
             {
-                AddElMagnetToDataBase(ElMagnetEditor);
+                AddWheelToDataBase(ElMagnetEditor);
             }
             if (mode == "Edit")
             {
@@ -138,55 +162,57 @@ namespace RacursConfig.Pages
         {
             EditorVisibility = Visibility.Visible;
             mode = "Add";
-            ElMagnetEditor = new ElMagnet { Name = "Новый Электромагнит", Description = "Описание" };
+            Axis = new Vector(0, 0, 0);
+            ElMagnetEditor = new ElMagnet();
 
         }
-        private async void Delete(object elMagnet)
+        private async void Delete(object ElMagnet)
         {
             EditorVisibility = Visibility.Hidden;
             try
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, route);
-                string content = JsonConvert.SerializeObject(elMagnet);
+                string content = JsonConvert.SerializeObject(ElMagnet);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                   // WarningMessages += GetTimeLabel() + deleteMessage;
-                    getElMagnets();
+                    Messages.Add(GetTimeLabel() + deleteMessage);
+                    getFlyheels();
 
                 }
-                //else { _WarningMessages += GetTimeLabel() + (response.ReasonPhrase  +'\n'); }
+                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-                //WarningMessages +=(GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void EditElMagnet(ElMagnet elMagnet)
+        private async void EditElMagnet(ElMagnet ElMagnet)
         {
             try
             {
+
+                ElMagnet.Axis = Axis;
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, route);
-               
-                string content = JsonConvert.SerializeObject(elMagnet);
+                string content = JsonConvert.SerializeObject(ElMagnet);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     EditorVisibility = Visibility.Hidden;
-                   //WarningMessages += GetTimeLabel() + editMessage;
-                    getElMagnets();
+                    Messages.Add(GetTimeLabel() + editMessage);
+                    getFlyheels();
 
                 }
-              //  else { _WarningMessages += (GetTimeLabel() + response.ReasonPhrase); }
+                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-                //WarningMessages += (GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
-        }       
-        private async void getElMagnets()
+        }
+        private async void getFlyheels()
         {
             try
             {
@@ -194,41 +220,42 @@ namespace RacursConfig.Pages
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync();
-                  //  WarningMessages += (GetTimeLabel() + getMessage);
-                    ElMagnets = JsonConvert.DeserializeObject<List<ElMagnet>>(result.Result);
+                    Messages.Add(GetTimeLabel() + getMessage);
+                    ElMagnets = JsonSerializer.Deserialize<List<ElMagnet>>(result.Result, options);
                 }
-                //else { _WarningMessages += (response.ReasonPhrase); }
+                else { Messages.Add(response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-              // WarningMessages += (GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void AddElMagnetToDataBase(ElMagnet elMagnet)
+        private async void AddWheelToDataBase(ElMagnet ElMagnet)
         {
             try
             {
-                
-                string content = JsonConvert.SerializeObject(elMagnet);               
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/elMagnets");
+
+                ElMagnet.Axis = Axis;
+                string content = JsonConvert.SerializeObject(ElMagnet);
+                //content = System.Text.Json.JsonSerializer.Serialize(ARS);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, route);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
-                   //  WarningMessages += GetTimeLabel() + addMessage;
-                    getElMagnets();
+                    EditorVisibility = Visibility.Hidden;
+                    Messages.Add(GetTimeLabel() + addMessage);
+                    getFlyheels();
 
                 }
-                else {
-                    //arningMessages += GetTimeLabel() + response.ReasonPhrase; 
-                }
+                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-               // WarningMessages +=GetTimeLabel() + exception.Message;
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-       
+
     }
 
 }
