@@ -25,7 +25,7 @@
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label HorizontalAlignment="Center" Grid.Row="0">Список Магнетометров</Label>
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список Датчиков Угловых Скоростей</Label>
         <GridSplitter Margin="0,30,0,0"></GridSplitter>
         <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedARS}" ItemsSource="{Binding ARSes}">
             <DataGrid.Columns>
