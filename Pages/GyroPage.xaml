@@ -1,0 +1,270 @@
+﻿<Page x:Class="RacursConfig.Pages.GyroPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RacursConfig.Pages" xmlns:controls="clr-namespace:RacursConfig.Controls" xmlns:system="clr-namespace:System;assembly=System.Runtime"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1300"  Background="#EAEDF0"
+      Title="GyroPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type controls:NumberField}">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="480" ></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список Магнетометров</Label>
+        <GridSplitter Margin="0,30,0,0"></GridSplitter>
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedGyro}" ItemsSource="{Binding Gyros}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="150" Header="Название" Binding="{Binding Name}" />
+                <DataGridTextColumn Width="150" Header="Описание" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="100" Header="J" Binding="{Binding J}"/>
+                <DataGridTextColumn Width="100" Header="Jg" Binding="{Binding Jg}"/>
+                <DataGridTextColumn Width="100" Header="KPw" Binding="{Binding KPw}"/>
+                <DataGridTextColumn Width="100" Header="WrMax" Binding="{Binding Wr_Max}"/>
+                <DataGridTextColumn Width="100" Header="WgMax" Binding="{Binding Wg_Max}"/>
+                <DataGridTextColumn Width="100" Header="PMax" Binding="{Binding P_Max}"/>
+                <DataGridTextColumn Width="100" Header="IMax" Binding="{Binding I_Max}"/>
+                <DataGridTextColumn Width="100" Header="IDotMax" Binding="{Binding I_dotMax}"/>
+                <DataGridTextColumn Width="100" Header="U_Max" Binding="{Binding U_Max}"/>
+
+                <DataGridTemplateColumn Width="150" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"   Margin="1"   Content="Изменить" Command="{Binding DataContext.EditCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"    Content="Удалить" Command="{Binding DataContext.DeleteCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Height="40" Orientation="Horizontal">
+            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="100" Margin="40,0,2,2" Content="Добавить" Command="{Binding AddCommand}"></Button>
+
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Grid Visibility="{Binding EditorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="190"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="120"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Название"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Описание"></TextBlock>
+                   
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Vector X1"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Vector X2"></TextBlock>
+
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Vector Y1"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="Vector Y2"></TextBlock>
+
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="Vector Z1"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="Vector Z2"></TextBlock>
+
+                    <TextBlock Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" Text="X"></TextBlock>
+                    <TextBlock Grid.Column="3" HorizontalAlignment="Center"  Grid.Row="2" Text="Y"></TextBlock>
+                    <TextBlock Grid.Column="4" HorizontalAlignment="Center" Grid.Row="2" Text="Z"></TextBlock>
+
+ 
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding GyroEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding GyroEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
+
+                    <ComboBox Grid.Column="2" Grid.Row="3" SelectedItem="{Binding GyroVectorX.Vector1.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="3" SelectedItem="{Binding GyroVectorX.Vector1.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="3" SelectedItem="{Binding GyroVectorX.Vector1.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+
+
+                    <ComboBox Grid.Column="2" Grid.Row="4" SelectedItem="{Binding GyroVectorX.Vector2.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="4" SelectedItem="{Binding GyroVectorX.Vector2.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="4" SelectedItem="{Binding GyroVectorX.Vector2.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                   
+
+                    <ComboBox Grid.Column="2" Grid.Row="5" SelectedItem="{Binding GyroVectorY.Vector1.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="5" SelectedItem="{Binding GyroVectorY.Vector1.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="5" SelectedItem="{Binding GyroVectorY.Vector1.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="2" Grid.Row="6" SelectedItem="{Binding GyroVectorY.Vector2.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="6" SelectedItem="{Binding GyroVectorY.Vector2.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="6" SelectedItem="{Binding GyroVectorY.Vector2.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+
+                    <ComboBox Grid.Column="2" Grid.Row="7" SelectedItem="{Binding GyroVectorZ.Vector1.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="7" SelectedItem="{Binding GyroVectorZ.Vector1.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="7" SelectedItem="{Binding GyroVectorZ.Vector1.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="2" Grid.Row="8" SelectedItem="{Binding GyroVectorZ.Vector2.X}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="3" Grid.Row="8" SelectedItem="{Binding GyroVectorZ.Vector2.Y}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+                    <ComboBox Grid.Column="4" Grid.Row="8" SelectedItem="{Binding GyroVectorZ.Vector2.Z}">
+                        <system:Double>1</system:Double>
+                        <system:Double>0</system:Double>
+                        <system:Double>-1</system:Double>
+                    </ComboBox>
+
+
+
+
+
+                    <!--<controls:NumberField Grid.Column="2" Grid.Row="3" Text="{Binding Path =Axis.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="3" Text="{Binding Path =Axis.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="4" Grid.Row="3" Text="{Binding Path =Axis.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>-->
+
+
+
+
+                    <TextBlock Grid.Column="7" Grid.Row="0" Text="J"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="1" Text="Jg"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="2" Text="KPw"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="3" Text="Wr_Max"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="4" Text="Wg_Max"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="5" Text="P_Max"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="6" Text="I_Max"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="7" Text="I_dotMax"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="8" Text="U_Max"></TextBlock>
+
+
+                    <controls:NumberField Grid.Column="8" Grid.Row="0" Text="{Binding GyroEditor.J, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="1" Text="{Binding GyroEditor.Jg,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="2" Text="{Binding GyroEditor.KPw,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="3" Text="{Binding GyroEditor.Wr_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="4" Text="{Binding GyroEditor.Wg_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="5" Text="{Binding GyroEditor.P_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="6" Text="{Binding GyroEditor.I_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="7" Text="{Binding GyroEditor.I_dotMax,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="8" Text="{Binding GyroEditor.U_Max,Mode=TwoWay}"></controls:NumberField>
+
+
+
+
+
+                    <Button Grid.Row="11" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+                    <Button Grid.Row="11"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="2" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+        <!--<TextBox  VerticalContentAlignment="Top" TextAlignment="Left" Grid.Row="4" Text="{Binding WarningMessages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>-->
+        <GridSplitter Margin="0,30,0,0" Grid.ColumnSpan="10"></GridSplitter>
+        <ScrollViewer Grid.Row="4">
+            <ItemsControl Background="White"   ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding}" FontSize="14" Foreground="Gray"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+
+</Page>

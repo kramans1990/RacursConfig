@@ -1,5 +1,6 @@
 ﻿
 using RacursConfig.Pages;
+using RacursConfig.PagesVM;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -41,7 +42,9 @@ namespace RacursConfig
 
         public RelayCommand MagnetometersPageCommand => new RelayCommand(x => { CurrentPage = new MagnetometersPage(); });
         public RelayCommand ARSPageCommand => new RelayCommand(x => { CurrentPage = new ARSPage(); });
-        public RelayCommand FlyWheelCommand => new RelayCommand(x => { CurrentPage = new FlyWheelPage(); });
+        public RelayCommand FlyWheelPageCommand => new RelayCommand(x => { CurrentPage = new FlyWheelPage(); });
+
+        public RelayCommand GyroPageCommand => new RelayCommand(x => { CurrentPage = new GyroPage(); });
         public MainWindowVM()
         {
            

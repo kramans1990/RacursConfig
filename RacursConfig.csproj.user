@@ -25,6 +25,9 @@
     <Compile Update="Pages\ARSPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\GyroPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\MagnetometersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ElMagnetPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\GyroPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MagnetometersPage.xaml">
