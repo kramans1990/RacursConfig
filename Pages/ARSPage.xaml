@@ -71,13 +71,17 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="130"></ColumnDefinition>
-                        <ColumnDefinition Width="180"></ColumnDefinition>
-                        <ColumnDefinition Width="180"></ColumnDefinition>
-                        <ColumnDefinition Width="180"></ColumnDefinition>
-                        <ColumnDefinition Width="190"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="120"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -99,49 +103,54 @@
                     <TextBlock Grid.Column="1" Grid.Row="1" Text="Описание"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="2" Text="Att"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="3" Text="Axis"></TextBlock>
-                  
+                    <TextBlock Grid.Column="2" Grid.Row="2" Text="X"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="2" Text="Y"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="2" Text="Z"></TextBlock>
+                    <TextBlock Grid.Column="8" Grid.Row="2" Text="W"></TextBlock>
 
 
-                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding ARSEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
-                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding ARSEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0" Text="{Binding ARSEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding ARSEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
 
-                    <controls:NumberField Grid.Column="2" Grid.Row="2" Text="{Binding Path =Att.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
-                    <controls:NumberField Grid.Column="3" Grid.Row="2" Text="{Binding Path =Att.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
-                    <controls:NumberField Grid.Column="4" Grid.Row="2" Text="{Binding Path =Att.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
-                    <controls:NumberField Grid.Column="5" Grid.Row="2" Text="{Binding Path =Att.W,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="2" Text="{Binding Path =Att.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="2" Text="{Binding Path =Att.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="2" Text="{Binding Path =Att.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
+                    <controls:NumberField Grid.Column="9" Grid.Row="2" Text="{Binding Path =Att.W,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
 
+                    <TextBlock Grid.Column="2" Grid.Row="3" Text="X"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="3" Text="Y"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="3" Text="Z"></TextBlock>
 
-
-                    <controls:NumberField Grid.Column="2" Grid.Row="3" Text="{Binding Path =Axis.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
-                    <controls:NumberField Grid.Column="3" Grid.Row="3" Text="{Binding Path =Axis.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
-                    <controls:NumberField Grid.Column="4" Grid.Row="3" Text="{Binding Path =Axis.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
-
-
-
-
-                    <TextBlock Grid.Column="7" Grid.Row="0" Text="ADCMax"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="1" Text="Wmax"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="2" Text="Bias"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="3" Text="BiasSd"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="4" Text="DeadZone"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="5" Text="MagnSens"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="6" Text="Error"></TextBlock>
+                    <controls:NumberField Grid.Column="3" Grid.Row="3" Text="{Binding Path =Axis.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="3" Text="{Binding Path =Axis.Y,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="3" Text="{Binding Path =Axis.Z,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
 
 
-                    <controls:NumberField Grid.Column="8" Grid.Row="0" Text="{Binding ARSEditor.ADC_max, Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="1" Text="{Binding ARSEditor.w_max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="2" Text="{Binding ARSEditor.bias,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="3" Text="{Binding ARSEditor.bias_sd,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="4" Text="{Binding ARSEditor.dead_zone,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="5" Text="{Binding ARSEditor.magn_sens,Mode=TwoWay}"></controls:NumberField>                    
-                    <controls:NumberField Grid.Column="8" Grid.Row="6" Text="{Binding ARSEditor.error,Mode=TwoWay}"></controls:NumberField>
+
+
+                    <TextBlock Grid.Column="11" Grid.Row="0" Text="ADCMax"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="1" Text="Wmax"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="2" Text="Bias"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="3" Text="BiasSd"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="4" Text="DeadZone"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="5" Text="MagnSens"></TextBlock>
+                    <TextBlock Grid.Column="11" Grid.Row="6" Text="Error"></TextBlock>
+
+
+                    <controls:NumberField Grid.Column="12" Grid.Row="0" Text="{Binding ARSEditor.ADC_max, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="1" Text="{Binding ARSEditor.w_max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="2" Text="{Binding ARSEditor.bias,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="3" Text="{Binding ARSEditor.bias_sd,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="4" Text="{Binding ARSEditor.dead_zone,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="5" Text="{Binding ARSEditor.magn_sens,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="12" Grid.Row="6" Text="{Binding ARSEditor.error,Mode=TwoWay}"></controls:NumberField>
                    
                  
 
 
 
                     <Button Grid.Row="11" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
-                    <Button Grid.Row="11"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="2" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
+                    <Button Grid.Row="11"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="3" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
                 </Grid>
             </ScrollViewer>
         </StackPanel>

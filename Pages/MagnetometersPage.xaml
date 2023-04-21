@@ -115,10 +115,10 @@
                 <TextBlock Grid.Column="1" Grid.Row="2" Text="Att"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="5" Text="Attm"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="9" Text="Skew"></TextBlock>
-                    <TextBlock Grid.Column="2" Grid.Row="2" Text="X"></TextBlock>
-                    <TextBlock Grid.Column="4" Grid.Row="2" Text="Y"></TextBlock>
-                    <TextBlock Grid.Column="6" Grid.Row="2" Text="Z"></TextBlock>
-                    <TextBlock Grid.Column="8" Grid.Row="2" Text="W"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="X"></TextBlock>
+                <TextBlock Grid.Column="4" Grid.Row="2" Text="Y"></TextBlock>
+                <TextBlock Grid.Column="6" Grid.Row="2" Text="Z"></TextBlock>
+                <TextBlock Grid.Column="8" Grid.Row="2" Text="W"></TextBlock>
 
                     <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0" Text="{Binding MagnetometerEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
                     <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding MagnetometerEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
