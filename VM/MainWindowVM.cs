@@ -45,6 +45,8 @@ namespace RacursConfig
         public RelayCommand FlyWheelPageCommand => new RelayCommand(x => { CurrentPage = new FlyWheelPage(); });
 
         public RelayCommand GyroPageCommand => new RelayCommand(x => { CurrentPage = new GyroPage(); });
+
+        public RelayCommand SatellitePageCommand => new RelayCommand(x => { CurrentPage = new SatellitePage(); });
         public MainWindowVM()
         {
            

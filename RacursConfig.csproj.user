@@ -31,6 +31,9 @@
     <Compile Update="Pages\MagnetometersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\SatellitePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\StationsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -64,6 +67,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\MagnetometersPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\StationsPage.xaml">

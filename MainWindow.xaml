@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacursConfig" xmlns:controls="clr-namespace:RacursConfig.Controls"
         mc:Ignorable="d"
-        Title="RacursConfig" Height="450" Width="800" WindowState="Maximized">
+        Title="RacursConfig" Height="450" Width="800" WindowState="Maximized" MinWidth="1200" MinHeight="800">
     <Window.Resources>
         <Style TargetType="{x:Type Control}" x:Key="baseStyle">
             <Setter Property="FontSize" Value="16" />
@@ -29,6 +29,7 @@
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ARSPageCommand}"  Content=" ДУС  " Cursor="Hand"></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding FlyWheelPageCommand}"  Content=" Маховики  " Cursor="Hand"></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding GyroPageCommand}"  Content=" Гиропары  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding SatellitePageCommand}"  Content=" КА  " Cursor="Hand"></Button>
         </StackPanel>
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="DarkGray" Margin="2" >
             <Frame  NavigationUIVisibility="Hidden" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
