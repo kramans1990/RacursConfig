@@ -15,6 +15,7 @@ using RacursConfig.Controls;
 using System.Collections.ObjectModel;
 using Vector = RacursCore.types.Vector;
 using RacursCore;
+using RacursConfig.Pages;
 
 namespace RacursConfig.PagesVM
 {
@@ -95,8 +96,15 @@ namespace RacursConfig.PagesVM
         }
 
 
-     
 
+        public RelayCommand DeleteItemCommand
+        {
+            get; set;
+        }
+        public RelayCommand AddItemCommand
+        {
+            get; set;
+        }
 
         public SatellitePageVM()
         {
@@ -112,6 +120,8 @@ namespace RacursConfig.PagesVM
             SaveCommand = new RelayCommand(x => Save(), p => canSave());
             SelectedSatellite = new Satellite();
             EditCommand = new RelayCommand(x => Edit(x));
+            DeleteItemCommand = new RelayCommand(x => DeleteSatelliteItem(x));
+            AddItemCommand = new RelayCommand(x => AddSatelliteItem(x));
             Messages = new ObservableCollection<string>();
             options = new JsonSerializerOptions
             {
@@ -119,6 +129,47 @@ namespace RacursConfig.PagesVM
             };
 
         }
+
+        private void AddSatelliteItem(object type)
+        {
+            DialogWindow dialogWindow = new DialogWindow(type.ToString());
+            if (dialogWindow.ShowDialog() == true) { 
+                 SatelliteComponent component = dialogWindow.SelectedConponent;
+                if (component != null) { 
+                    switch (type) {
+                        case "Gyro":
+                            SatelliteEditor.Gyros.Add((component as Gyro));
+                            break;
+                        case "ElMagnet":
+                            SatelliteEditor.ElMagnets.Add((component as ElMagnet));
+                            break;
+                        case "Magnetometer":
+                            SatelliteEditor.Magnetometers.Add((component as Magnetometer));
+                            break;
+                        case "Flywheel":
+                            SatelliteEditor.Flywheels.Add((component as Flywheel));
+                            break;
+                    }
+                    SatelliteEditor = JsonSerializer.Deserialize<SatelliteModel>(JsonConvert.SerializeObject(SatelliteEditor), options);
+                }
+            }
+        }
+
+        private void DeleteSatelliteItem(object x)
+        {
+            var type = x.GetType();
+            switch (type.Name) {
+                case  "Gyro": SatelliteEditor.Gyros.Remove((x as Gyro));                   
+                    break;
+                case "ElMagnet":
+                    SatelliteEditor.ElMagnets.Remove((x as ElMagnet));
+                    break;
+
+            }
+            SatelliteEditor = JsonSerializer.Deserialize<SatelliteModel>(JsonConvert.SerializeObject(SatelliteEditor), options);
+
+        }
+
         private async void getFlyWheels()
         {
             try
@@ -205,7 +256,7 @@ namespace RacursConfig.PagesVM
         {
             EditorVisibility = Visibility.Visible;
             mode = "Add";          
-            SelectedSatellite = new Satellite();
+            SatelliteEditor = new SatelliteModel(new Satellite());
 
         }
         private async void Delete(object satellite)
