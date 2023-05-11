@@ -21,7 +21,7 @@ namespace RacursConfig.PagesVM
     {
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/Magnetometers";      
+        private string route = "/api/Magnetometer";      
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
         private string getMessage = " Запрос списка электромагнитов";

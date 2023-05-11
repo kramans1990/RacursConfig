@@ -23,7 +23,7 @@ namespace RacursConfig.Pages
 
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/elmagnets";
+        private string route = "/api/elmagnet";
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
         private string getMessage = " Запрос списка электромагнитов";

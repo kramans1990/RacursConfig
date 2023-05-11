@@ -17,7 +17,7 @@ namespace Client.PagesVM
     {   
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/stations";
+        private string route = "/api/station";
         private List<Station> _Stations;
         public List<Station> Stations
         {
