@@ -16,6 +16,8 @@ using System.Windows.Controls;
 using RacursConfig.Controls;
 using System.Collections.ObjectModel;
 using Vector = RacursCore.types.Vector;
+using System.CodeDom;
+
 namespace RacursConfig.Pages
 {
     /// <summary>
@@ -25,8 +27,13 @@ namespace RacursConfig.Pages
     {   
         public SatelliteComponent satelliteComponent { get; set; }
         private HttpClient httpClient;
+        private Type Type { get; set; }
         private string mode;
         private string routeGyro = "/api/gyro";
+        private string routeElMagnet = "/api/ElMagnet";
+        private string routeARS = "/api/ARS";
+        private string routeFlyWheel = "/api/FlyWheel";
+        private string routeMagnetometer = "/api/Magnetometer";
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
         private string getMessage = " Запрос списка ДУС";
@@ -37,6 +44,24 @@ namespace RacursConfig.Pages
         public DialogWindow(string type)
         {   
             InitializeComponent();
+            string route = "";
+            switch (type) {
+                 case "Gyro":
+                        route = routeGyro;                    
+                    break;
+                case "ElMagnet":
+                    route = routeElMagnet;
+                    break;
+                case "Magnetometer":
+                    route = routeMagnetometer;
+                    break;
+                case "Flywheel":
+                    route = routeFlyWheel;
+                    break;
+                case "ARS":
+                    route = routeARS;
+                    break;
+            }
             ComponentList.SelectionChanged += ComponentList_SelectionChanged;
             AddButton.Click += AddButton_Click;
             CancelButton.Click += CancelButton_Click;
@@ -46,7 +71,7 @@ namespace RacursConfig.Pages
             {
                 PropertyNameCaseInsensitive = true
             };
-            getComponents(routeGyro);
+            getComponents(route, type);
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -66,7 +91,7 @@ namespace RacursConfig.Pages
             AddButton.IsEnabled = true;
         }
 
-        private async void getComponents(string route)
+        private async void getComponents(string route, string type)
         {
             try
             {
@@ -74,8 +99,33 @@ namespace RacursConfig.Pages
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync();
-                    var components___ = JsonSerializer.Deserialize<List<Gyro>>(result.Result, options);
-                    components.AddRange(components___);
+                  
+                    switch (type)
+                    {
+                        case "Gyro":
+                            var componentsGyro = JsonSerializer.Deserialize <List<Gyro>> (result.Result, options);
+                            components.AddRange(componentsGyro);
+                            break;
+                        case "ElMagnet":
+                            var componentsElMagnet = JsonSerializer.Deserialize<List<ElMagnet>>(result.Result, options);
+                            components.AddRange(componentsElMagnet);
+                            break;
+                        case "Magnetometer":
+                            var componentsMagnetometer = JsonSerializer.Deserialize<List<Magnetometer>>(result.Result, options);
+                            components.AddRange(componentsMagnetometer);
+                            break;
+                        case "Flywheel":
+                            var componentsFlywheel = JsonSerializer.Deserialize<List<Flywheel>>(result.Result, options);
+                            components.AddRange(componentsFlywheel);
+                            break;
+                          
+                        case "ARS":
+                            var componentsARS = JsonSerializer.Deserialize<List<ARS>>(result.Result, options);
+                            components.AddRange(componentsARS);
+                            break;
+                    }
+
+                   
                     ComponentList.ItemsSource = components;
                 //ComponentList.SelectedIndex = ComponentList.Items.Count > 0 ? 0 : -1;
                 //AddButton.IsEnabled = ComponentList.SelectedIndex == -1 ? false : true;

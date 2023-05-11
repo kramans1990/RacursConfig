@@ -31,6 +31,70 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style TargetType="Button" x:Key="button-add-item">
+            <Setter Property="Background" Value="#FFF"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+            <!--<Setter Property="FontSize" Value="24"/>-->
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width"  Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Content" Value="+"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" >
+                        <Border Background="{TemplateBinding Background}"
+                            CornerRadius="5"
+                            BorderThickness="2"
+                            Padding="5"
+                            BorderBrush="Gray">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip" Value="Добавить"/>
+                <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DodgerBlue"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Button" x:Key="button-remove-item">
+            <Setter Property="Background" Value="#FFF"/>
+            <Setter Property="Foreground" Value="#000"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+            <!--<Setter Property="FontSize" Value="24"/>-->
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width"  Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Content" Value="-"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button" >
+                        <Border Background="{TemplateBinding Background}"
+                            CornerRadius="5"
+                            BorderThickness="2"
+                            Padding="5"
+                            BorderBrush="Gray">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip" Value="Удалить"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DodgerBlue"/>
+                    <Setter Property="Foreground" Value="#fff"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="Button" x:Key="button-grid">
             <Setter Property="Background" Value="#FFF"/>
             <Setter Property="Foreground" Value="#000"/>
