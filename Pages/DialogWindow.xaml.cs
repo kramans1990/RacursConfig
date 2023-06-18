@@ -1,8 +1,6 @@
 ﻿using RacursCore;
 using RacursCore.SatilliteComponents;
-using Newtonsoft.Json;
-using RacursCore.SatilliteComponents;
-using RacursCore.types;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +32,8 @@ namespace RacursConfig.Pages
         private string routeARS = "/api/ARS";
         private string routeFlyWheel = "/api/FlyWheel";
         private string routeMagnetometer = "/api/Magnetometer";
+        private string routeStarSensor = "/api/StarSensor";
+        private string routeSunSensor = "/api/SunSensor";
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
         private string getMessage = " Запрос списка ДУС";
@@ -55,11 +55,20 @@ namespace RacursConfig.Pages
                 case "Magnetometer":
                     route = routeMagnetometer;
                     break;
-                case "Flywheel":
+                case "Ssat":
+                    route = routeFlyWheel;
+                    break;
+                case "Msat":
                     route = routeFlyWheel;
                     break;
                 case "ARS":
                     route = routeARS;
+                    break;
+                case "SunSensor":
+                    route = routeSunSensor;
+                    break;
+                case "StarSensor":
+                    route = routeStarSensor;
                     break;
             }
             ComponentList.SelectionChanged += ComponentList_SelectionChanged;
@@ -114,18 +123,27 @@ namespace RacursConfig.Pages
                             var componentsMagnetometer = JsonSerializer.Deserialize<List<Magnetometer>>(result.Result, options);
                             components.AddRange(componentsMagnetometer);
                             break;
-                        case "Flywheel":
-                            var componentsFlywheel = JsonSerializer.Deserialize<List<Flywheel>>(result.Result, options);
-                            components.AddRange(componentsFlywheel);
+                        case "Msat":
+                            var componentsSmallFlywheel = JsonSerializer.Deserialize<List<Flywheel>>(result.Result, options);
+                            components.AddRange(componentsSmallFlywheel);
                             break;
-                          
+                        case "Ssat":
+                            var componentsMicroFlywheel = JsonSerializer.Deserialize<List<Flywheel>>(result.Result, options);
+                            components.AddRange(componentsMicroFlywheel);
+                            break;
                         case "ARS":
                             var componentsARS = JsonSerializer.Deserialize<List<ARS>>(result.Result, options);
                             components.AddRange(componentsARS);
                             break;
+                        case "SunSensor":
+                            var componentsSunSensor = JsonSerializer.Deserialize<List<SunSensor>>(result.Result, options);
+                            components.AddRange(componentsSunSensor);
+                            break;
+                        case "StarSensor":
+                            var componentsStarSensor = JsonSerializer.Deserialize<List<StarSensor>>(result.Result, options);
+                            components.AddRange(componentsStarSensor);
+                            break;
                     }
-
-                   
                     ComponentList.ItemsSource = components;
                 //ComponentList.SelectedIndex = ComponentList.Items.Count > 0 ? 0 : -1;
                 //AddButton.IsEnabled = ComponentList.SelectedIndex == -1 ? false : true;

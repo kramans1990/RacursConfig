@@ -1,0 +1,208 @@
+﻿<Page x:Name="page" x:Class="RacursConfig.Pages.SatellitePage.SatellitePage1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RacursConfig.Pages" xmlns:controls="clr-namespace:RacursConfig.Controls" xmlns:src="clr-namespace:RacursConfig.Pages.SatellitePage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      
+      Title="SatellitesPage" Background="#EAEDF0" >
+
+    <Page.Resources>
+        <Style TargetType="{x:Type controls:NumberField}">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
+        <src:ItemToImageValueConverter x:Key="converter"/>
+        <src:TypeToEnabledValueConverter x:Key="typeToEnableConverter"></src:TypeToEnabledValueConverter>
+      
+
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список КА</Label>
+        <GridSplitter Margin="0,30,0,0"></GridSplitter>
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedSatellite}" ItemsSource="{Binding Satellites}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="150" Header="Название" Binding="{Binding Name}" />
+                <DataGridTextColumn Width="150" Header="Номер" Binding="{Binding Number}"/>
+                <DataGridTextColumn Width="150" Header="Номер NORAD" Binding="{Binding Norad}"/>
+                <DataGridTextColumn Width="200" Header="Описание" Binding="{Binding Description}"/>
+
+                <DataGridTemplateColumn Width="150" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"   Margin="1"   Content="Изменить" Command="{Binding DataContext.EditCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"    Content="Удалить" Command="{Binding DataContext.DeleteCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Height="60" Orientation="Horizontal">
+            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="140"  Height="40" Margin="40,2,2,0" Content="Добавить" Command="{Binding AddCommand}"></Button>  
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Grid Visibility="{Binding EditorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="140"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                     
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Номер"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="NORAD"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="Название"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Описание"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Масса, Кг"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="Тип"></TextBlock>
+
+                    <TextBlock Grid.Column="10" Grid.Row="0" Text="a,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="1" Text="b,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="2" Text="c,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="3" Text="d,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="4" Text="φ"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="5" Text="s,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="6" Text="l,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="7" Text="f,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="8" Text="g,см"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="9" Text="h"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="10" Text="n"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="11" Text="m"></TextBlock>
+                    <TextBlock Grid.Column="10" Grid.Row="12" Text="p"></TextBlock>
+
+                    <TextBlock Grid.Column="14" Grid.Row="0" Text="ЦM(X,Y,Z)"></TextBlock>
+                    <TextBlock Grid.Column="14" Grid.Row="2" Text="Тензор Инерции"></TextBlock>
+                 
+
+
+
+
+                    <controls:NumberField  Grid.Column="3"  Grid.Row="0" Text="{Binding SatelliteEditor.Number,Mode=TwoWay}"  ValidationMin="1" ValidationMax="9999" RangeValidation="True"></controls:NumberField>
+                    <controls:NumberField  Grid.Column="3"  Grid.Row="1" Text="{Binding SatelliteEditor.Norad,Mode=TwoWay}"  ValidationMin="1" ValidationMax="99999" RangeValidation="True" ></controls:NumberField>
+                    <controls:TextField    Grid.Column="3" Grid.Row="2" Text="{Binding SatelliteEditor.Name,Mode=TwoWay}" MinLength="0"></controls:TextField>
+                    <controls:TextField    Grid.Column="3" Grid.ColumnSpan="6" Grid.Row="3" Text="{Binding SatelliteEditor.Description,Mode=TwoWay}" MinLength="10"></controls:TextField>
+                    
+
+
+                    <ComboBox SelectedValuePath="Content" SelectedValue="{Binding  Path= SatelliteEditor.SatelliteType ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Grid.Row="6" Grid.Column="3">
+                        <ComboBoxItem>A</ComboBoxItem>
+                        <ComboBoxItem>Б</ComboBoxItem>
+                        <ComboBoxItem>В</ComboBoxItem>
+                        <ComboBoxItem>Г</ComboBoxItem>
+                        <ComboBoxItem>Д</ComboBoxItem>
+                    </ComboBox>
+                    <Image Width="500" Height="300" Stretch="Uniform"  Source="{Binding Path=SatelliteEditor.SatelliteType, Converter={StaticResource converter}}"  Grid.ColumnSpan="6"  Grid.Column="3" Grid.Row="6" Grid.RowSpan="10" ></Image>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="2" Text="{Binding SatelliteEditor.C,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter}, ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="0" Text="{Binding SatelliteEditor.A,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="1" Text="{Binding SatelliteEditor.B,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="2" Text="{Binding SatelliteEditor.C,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="3" Text="{Binding SatelliteEditor.D,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="4" Text="{Binding SatelliteEditor.Phi,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="5" Text="{Binding SatelliteEditor.S,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="6" Text="{Binding SatelliteEditor.L,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="7" Text="{Binding SatelliteEditor.F,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="8" Text="{Binding SatelliteEditor.G,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="9" Text="{Binding SatelliteEditor.H,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г}" ></controls:NumberField>
+                    <ComboBox  Grid.Column="12"  Grid.Row="10" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter}, ConverterParameter=г-д}"  SelectedValuePath="Content" SelectedValue="{Binding  Path= SatelliteEditor.N ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">                      
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>6</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox  Grid.Column="12"  Grid.Row="11" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter}, ConverterParameter=д}"  SelectedValuePath="Content" SelectedValue="{Binding  Path= SatelliteEditor.M ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
+                        <ComboBoxItem>3</ComboBoxItem>
+                        <ComboBoxItem>4</ComboBoxItem>
+                        <ComboBoxItem>5</ComboBoxItem>
+                        <ComboBoxItem>6</ComboBoxItem>
+                    </ComboBox>
+                    <CheckBox VerticalAlignment="Center" Grid.Column="12"  Grid.Row="12" IsEnabled="{Binding  Path= SatelliteEditor.SatelliteType ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay, Converter={StaticResource typeToEnableConverter}, ConverterParameter=д}"  IsChecked="{Binding  Path= SatelliteEditor.P ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"></CheckBox>
+
+                    <controls:NumberField  Grid.Column="16"  Grid.Row="0" Text="{Binding SatelliteEditor.CenterX,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="18"  Grid.Row="0" Text="{Binding SatelliteEditor.CenterY,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="20"  Grid.Row="0" Text="{Binding SatelliteEditor.CenterZ,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" ></controls:NumberField>
+                    <controls:NumberField Grid.Column="16" Grid.Row="1" Text="{Binding TI.N11,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="18" Grid.Row="1" Text="{Binding TI.N12,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="20" Grid.Row="1" Text="{Binding TI.N13,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="16" Grid.Row="2" Text="{Binding TI.N21,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="18" Grid.Row="2" Text="{Binding TI.N22,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="20" Grid.Row="2" Text="{Binding TI.N23,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="16" Grid.Row="3" Text="{Binding TI.N31,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="18" Grid.Row="3" Text="{Binding TI.N32,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+                    <controls:NumberField Grid.Column="20" Grid.Row="3" Text="{Binding TI.N33,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
+
+                    <Button Grid.Row="13" Grid.RowSpan="2" Height="50" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="10" Grid.ColumnSpan="4" Margin="2" Content="Компоновка" Command="{Binding OpenSattelliteModelEdtorCommand}"></Button>
+                    <Button Grid.Row="16" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+                    <Button Grid.Row="16"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="3" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+      
+
+        <StackPanel Background="Azure" Grid.Row="4"></StackPanel>
+    </Grid>
+
+</Page>

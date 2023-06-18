@@ -348,9 +348,7 @@ namespace Client.PagesVM
                 Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private string GetTimeLabel() {
-            return "[" + DateTime.Now.ToString() + "] ";
-        }
+       
     }
     
 }

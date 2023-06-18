@@ -16,6 +16,10 @@ using System.Collections.ObjectModel;
 using Vector = RacursCore.types.Vector;
 using RacursCore;
 using RacursConfig.Pages;
+using RacursCore.SatelliteModel;
+using RacursConfig.Models;
+using RacursLib.LibMath;
+using RacursConfig.Pages.SatellitePage;
 
 namespace RacursConfig.PagesVM
 {
@@ -66,7 +70,19 @@ namespace RacursConfig.PagesVM
                 OnPropertyChanged(nameof(Flywheels));
             }
         }
-
+        private Matrix3 _TI;
+        public Matrix3 TI
+        {
+            get
+            {
+                return _TI;
+            }
+            set
+            {
+                _TI = value;
+                OnPropertyChanged(nameof(TI));
+            }
+        }
         private Satellite _SelectedSatellite;
         public Satellite SelectedSatellite
         {
@@ -81,8 +97,8 @@ namespace RacursConfig.PagesVM
             }
         }
 
-        private SatelliteModel _SatelliteEditor;
-        public SatelliteModel SatelliteEditor
+        private Satellite _SatelliteEditor;
+        public Satellite SatelliteEditor
         {
             get
             {
@@ -94,14 +110,7 @@ namespace RacursConfig.PagesVM
                 OnPropertyChanged(nameof(SatelliteEditor));
             }
         }
-
-
-
-        public RelayCommand DeleteItemCommand
-        {
-            get; set;
-        }
-        public RelayCommand AddItemCommand
+        public RelayCommand OpenSattelliteModelEdtorCommand
         {
             get; set;
         }
@@ -117,10 +126,11 @@ namespace RacursConfig.PagesVM
             CancelCommand = new RelayCommand(x => Cancel());
             DeleteCommand = new RelayCommand(x => Delete(x));
             SaveCommand = new RelayCommand(x => Save(), p => canSave());
-            SelectedSatellite = new Satellite();
+            SatelliteEditor = new Satellite {SatelliteType= "A" , Name="Name"};
+            
             EditCommand = new RelayCommand(x => Edit(x));
-            DeleteItemCommand = new RelayCommand(x => DeleteSatelliteItem(x));
-            AddItemCommand = new RelayCommand(x => AddSatelliteItem(x));
+          
+            OpenSattelliteModelEdtorCommand = new RelayCommand(x => OpenModelEditor());
             Messages = new ObservableCollection<string>();
             options = new JsonSerializerOptions
             {
@@ -129,94 +139,39 @@ namespace RacursConfig.PagesVM
 
         }
 
-        private void AddSatelliteItem(object type)
+        private void OpenModelEditor()
         {
-            DialogWindow dialogWindow = new DialogWindow(type.ToString());
-            if (dialogWindow.ShowDialog() == true) { 
-                 SatelliteComponent component = dialogWindow.SelectedConponent;
-                if (component != null) { 
-                    switch (type) {
-                        case "Gyro":
-                            SatelliteEditor.Gyros.Add((component as Gyro));
-                            break;
-                        case "ElMagnet":
-                            SatelliteEditor.ElMagnets.Add((component as ElMagnet));
-                            break;
-                        case "Magnetometer":
-                            SatelliteEditor.Magnetometers.Add((component as Magnetometer));
-                            break;
-                        case "Flywheel":
-                            SatelliteEditor.Flywheels.Add((component as Flywheel));
-                            break;
-                        case "ARS":
-                            SatelliteEditor.Ars.Add((component as ARS));
-                            break;
-                    }
-                    SatelliteEditor = JsonSerializer.Deserialize<SatelliteModel>(JsonConvert.SerializeObject(SatelliteEditor), options);
-                }
+            SatellitteComponetsEditor editorWindow = new SatellitteComponetsEditor(SatelliteEditor);
+            if (editorWindow.ShowDialog() == true)
+            {
+             
             }
         }
 
-        private void DeleteSatelliteItem(object x)
-        {
-            var type = x.GetType();
-            switch (type.Name) {
-                case  "Gyro": SatelliteEditor.Gyros.Remove((x as Gyro));                   
-                    break;
-                case "ElMagnet":
-                    SatelliteEditor.ElMagnets.Remove((x as ElMagnet));
-                    break;
-                case "Magnetometer":
-                    SatelliteEditor.Magnetometers.Remove((x as Magnetometer));
-                    break;
-                case "ARS":
-                    SatelliteEditor.Ars.Remove((x as ARS));
-                    break;
-                case "Flywheel":
-                    SatelliteEditor.Flywheels.Remove((x as Flywheel));
-                    break;
+       
 
-            }
-            SatelliteEditor = JsonSerializer.Deserialize<SatelliteModel>(JsonConvert.SerializeObject(SatelliteEditor), options);
+     
 
-        }
-
-        //private async void getFlyWheels()
-        //{
-        //    try
-        //    {
-        //        var response = await httpClient.GetAsync(routeFlyWheels);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var result = response.Content.ReadAsStringAsync();
-        //            Messages.Add(GetTimeLabel() + getMessage);
-        //            Flywheels = JsonSerializer.Deserialize<List<Flywheel>>(result.Result, options);
-        //        }
-        //        else { Messages.Add(response.ReasonPhrase); }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        Messages.Add(GetTimeLabel() + exception.Message);
-        //    }
-        //}
+      
         private bool canSave()
         {
-            DependencyObject do_ = (Application.Current.MainWindow);
-            var frame = FindVisualChildren<Frame>((do_));
-            List<NumberField> fieldsNum = FindVisualChildren<NumberField>(frame.First()).ToList();
-            var find_FalseNum = fieldsNum.Where(p => p.IsValid == false);
-            bool result = find_FalseNum.Count() == 0 ? true : false;
+            //DependencyObject do_ = (Application.Current.MainWindow);
+            //var frame = FindVisualChildren<Frame>((do_));
+            //List<NumberField> fieldsNum = FindVisualChildren<NumberField>(frame.First()).ToList();
+            //var find_FalseNum = fieldsNum.Where(p => p.IsValid == false);
+            //bool result = find_FalseNum.Count() == 0 ? true : false;
 
-            if (!result)
-            {
-                return result;
-            }
+            //if (!result)
+            //{
+            //    return result;
+            //}
 
-            List<TextField> fieldsText = FindVisualChildren<TextField>(frame.First()).ToList();
-            var find_FalseText = fieldsText.Where(p => p.IsValid == false);
-            bool resultText = find_FalseText.Count() == 0 ? true : false;
+            //List<TextField> fieldsText = FindVisualChildren<TextField>(frame.First()).ToList();
+            //var find_FalseText = fieldsText.Where(p => p.IsValid == false);
+            //bool resultText = find_FalseText.Count() == 0 ? true : false;
 
-            return resultText;
+            //return resultText;
+            return true;
         }
 
         private void Edit(object satellite)
@@ -224,6 +179,7 @@ namespace RacursConfig.PagesVM
             int satId = ((Satellite)satellite).Id;
             getSatelliteModel(satId);
             EditorVisibility = Visibility.Visible;
+            
             mode = "Edit";
 
 
@@ -238,7 +194,42 @@ namespace RacursConfig.PagesVM
                 {
                     var result = response.Content.ReadAsStringAsync();
                     Messages.Add(GetTimeLabel() + getMessage);
-                    SatelliteEditor = JsonSerializer.Deserialize<SatelliteModel>(result.Result, options);
+                    SatelliteEditor = JsonSerializer.Deserialize<Satellite>(result.Result, options);
+                    SatelliteEditor.Ssat1 = SatelliteEditor.SmallWheels[0];
+                    SatelliteEditor.Ssat2 = SatelliteEditor.SmallWheels[1];
+                    SatelliteEditor.Ssat3 = SatelliteEditor.SmallWheels[2];
+                    SatelliteEditor.Ssat4 = SatelliteEditor.SmallWheels[3];
+                    SatelliteEditor.Msat1 = SatelliteEditor.MicroWheels[0];
+                    SatelliteEditor.Msat2 = SatelliteEditor.MicroWheels[1];
+                    SatelliteEditor.Msat3 = SatelliteEditor.MicroWheels[2];
+                    SatelliteEditor.Msat4 = SatelliteEditor.MicroWheels[3];
+                    SatelliteEditor.MTM1 = SatelliteEditor.Magnetometers[0];
+                    SatelliteEditor.MTM2 = SatelliteEditor.Magnetometers[1];
+                    SatelliteEditor.MTM3 = SatelliteEditor.Magnetometers[2];
+                    SatelliteEditor.ElMagnet1 = SatelliteEditor.ElMagnets[0];
+                    SatelliteEditor.ElMagnet2 = SatelliteEditor.ElMagnets[1];
+                    SatelliteEditor.ElMagnet3 = SatelliteEditor.ElMagnets[2];
+                    SatelliteEditor.ARS1 = SatelliteEditor.ARS[0];
+                    SatelliteEditor.ARS2 = SatelliteEditor.ARS[1];
+                    SatelliteEditor.ARS3 = SatelliteEditor.ARS[2];
+                    SatelliteEditor.Gyro1 = SatelliteEditor.Gyros[0];
+                    SatelliteEditor.Gyro2 = SatelliteEditor.Gyros[1];
+                    SatelliteEditor.Gyro3 = SatelliteEditor.Gyros[2];
+                    SatelliteEditor.StarSensor1 = SatelliteEditor.StarSensors[0];
+                    SatelliteEditor.StarSensor2 = SatelliteEditor.StarSensors[1];
+                    SatelliteEditor.StarSensor3 = SatelliteEditor.StarSensors[2];
+                    SatelliteEditor.StarSensor4 = SatelliteEditor.StarSensors[3];
+                    SatelliteEditor.SunSensor1 = SatelliteEditor.SunSensors[0];
+                    SatelliteEditor.SunSensor2 = SatelliteEditor.SunSensors[1];
+                    SatelliteEditor.SunSensor3 = SatelliteEditor.SunSensors[2];
+                    SatelliteEditor.SunSensor4 = SatelliteEditor.SunSensors[3];
+                    SatelliteEditor.SunSensor5 = SatelliteEditor.SunSensors[4];
+                    SatelliteEditor.SunSensor6 = SatelliteEditor.SunSensors[5];
+
+
+
+
+                    TI = SatelliteEditor.TI;
                 }
                 else { Messages.Add(response.ReasonPhrase); }
             }
@@ -256,18 +247,24 @@ namespace RacursConfig.PagesVM
         {
             if (mode == "Add")
             {
-               AddSatelliteToDataBase(SatelliteEditor);
+               AddSatelliteToDataBase();
             }
             if (mode == "Edit")
             {
-                EditSatellite(SatelliteEditor);
+                EditSatellite();
             }
         }
         private void Add()
         {
             EditorVisibility = Visibility.Visible;
-            mode = "Add";          
-            SatelliteEditor = new SatelliteModel(new Satellite());
+            mode = "Add";            
+            SatelliteEditor.SatelliteType = "A";
+            SatelliteEditor.N = 2;
+            SatelliteEditor.M = 1;
+            SatelliteEditor.Name = "Name";
+            SatelliteEditor.SmallWheels = new FlywheelModel[4];
+            TI = new Matrix3(0,0,0,0,0,0,0,0,0);
+            
 
         }
         private async void Delete(object satellite)
@@ -292,29 +289,14 @@ namespace RacursConfig.PagesVM
                 Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void EditSatellite(SatelliteModel satelliteModel)
+        private async void EditSatellite()
         {
             try
             {
 
-                int[] gyros = satelliteModel.Gyros.Select(x => x.Id).ToArray();
-                int[] elMagnets = satelliteModel.ElMagnets.Select(x => x.Id).ToArray();
-                int[] arses = satelliteModel.Ars.Select(x => x.Id).ToArray();
-                int[] magnetometers = satelliteModel.Magnetometers.Select(x => x.Id).ToArray();
-                int[] Flywheels = satelliteModel.Flywheels.Select(x => x.Id).ToArray();
-
-                Satellite satellite = SatelliteEditor.Satellite;
-                satellite.Gyros = gyros;
-                satellite.Magnetometers = magnetometers;
-                satellite.ARS = arses;
-                satellite.ElMagnets = elMagnets;
-                satellite.Wheels = Flywheels;
-
-
-
-
+                setComponents();               
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, routeSatellite);
-                string content = JsonConvert.SerializeObject(satellite);
+                string content = JsonConvert.SerializeObject(SatelliteEditor);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
@@ -349,27 +331,13 @@ namespace RacursConfig.PagesVM
                 Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void AddSatelliteToDataBase(SatelliteModel satelliteModel)
+        private async void AddSatelliteToDataBase()
         {
             try
             {
+                setComponents();
+                string content = JsonConvert.SerializeObject(SatelliteEditor);
 
-
-                int[] gyros = satelliteModel.Gyros.Select(x => x.Id).ToArray();
-                int[] elMagnets = satelliteModel.ElMagnets.Select(x => x.Id).ToArray();
-                int[] arses = satelliteModel.Ars.Select(x => x.Id).ToArray();
-                int[] magnetometers = satelliteModel.Magnetometers.Select(x => x.Id).ToArray();
-                int[] Flywheels = satelliteModel.Flywheels.Select(x => x.Id).ToArray();
-
-                Satellite satellite = SatelliteEditor.Satellite;
-                satellite.Gyros = gyros;
-                satellite.Magnetometers = magnetometers;
-                satellite.ARS = arses;
-                satellite.ElMagnets = elMagnets;
-                satellite.Wheels = Flywheels;
-
-                string content = JsonConvert.SerializeObject(satellite);
-                //content = System.Text.Json.JsonSerializer.Serialize(ARS);
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, routeSatellite);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
@@ -387,7 +355,56 @@ namespace RacursConfig.PagesVM
                 Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
+        private void setComponents() {
+            FlywheelModel[] SmallWheels = new FlywheelModel[4];
+            SmallWheels[0] = SatelliteEditor.Ssat1;
+            SmallWheels[1] = SatelliteEditor.Ssat2;
+            SmallWheels[2] = SatelliteEditor.Ssat3;
+            SmallWheels[3] = SatelliteEditor.Ssat4;
+            SatelliteEditor.SmallWheels = SmallWheels;
+            FlywheelModel[]  MicroWheels = new FlywheelModel[4];
+            MicroWheels[0] = SatelliteEditor.Msat1;
+            MicroWheels[1] = SatelliteEditor.Msat2;
+            MicroWheels[2] = SatelliteEditor.Msat3;
+            MicroWheels[3] = SatelliteEditor.Msat4;
+            SatelliteEditor.MicroWheels = MicroWheels;
+            MagnetometerModel[] Magnetometers= new MagnetometerModel[3];
+            Magnetometers[0] = SatelliteEditor.MTM1;
+            Magnetometers[1] = SatelliteEditor.MTM2;
+            Magnetometers[2] = SatelliteEditor.MTM3;
+            SatelliteEditor.Magnetometers = Magnetometers;
+            ElMagnetModel[]   ElMagnets= new ElMagnetModel[3];
+            ElMagnets[0] = SatelliteEditor.ElMagnet1;
+            ElMagnets[1] = SatelliteEditor.ElMagnet2;
+            ElMagnets[2] = SatelliteEditor.ElMagnet3;
+            SatelliteEditor.ElMagnets = ElMagnets;
+            ARSModel[] Arses = new ARSModel[3];
+            Arses[0] = SatelliteEditor.ARS1;
+            Arses[1] = SatelliteEditor.ARS2;
+            Arses[2] = SatelliteEditor.ARS3;
+            SatelliteEditor.ARS = Arses;
+            GyroModel[] Gyros = new GyroModel[3];
+            Gyros[0] = SatelliteEditor.Gyro1;
+            Gyros[1] = SatelliteEditor.Gyro2;
+            Gyros[2] = SatelliteEditor.Gyro3;
+            SatelliteEditor.Gyros = Gyros;
+            StarSensorModel[] StarSensors = new StarSensorModel[4];
+            StarSensors[0] = SatelliteEditor.StarSensor1;
+            StarSensors[1] = SatelliteEditor.StarSensor2;
+            StarSensors[2] = SatelliteEditor.StarSensor3;
+            StarSensors[3] = SatelliteEditor.StarSensor4;
+            SatelliteEditor.StarSensors = StarSensors;
+            SunSensorModel[] SunSensors = new SunSensorModel[6];
+            SunSensors[0] = SatelliteEditor.SunSensor1;
+            SunSensors[1] = SatelliteEditor.SunSensor2;
+            SunSensors[2] = SatelliteEditor.SunSensor3;
+            SunSensors[3] = SatelliteEditor.SunSensor4;
+            SunSensors[4] = SatelliteEditor.SunSensor5;
+            SunSensors[5] = SatelliteEditor.SunSensor6;
+            SatelliteEditor.SunSensors = SunSensors;
 
+
+        }
     }
 
 }

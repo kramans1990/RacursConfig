@@ -23,13 +23,15 @@
         </Grid.RowDefinitions>
         
         <StackPanel Orientation="Horizontal">            
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding StationsPageCommand}"  Content=" Станции  "></Button>
+            <Button Style="{StaticResource button-primary}" Width="100" Margin="2,2,1,0"  Command="{Binding StationsPageCommand}"  Content=" Станции  "></Button>
             <Button Style="{StaticResource button-primary}" Width="160" Margin="2,2,1,0"  Command="{Binding ElMagnetsPageCommand}"  Content=" Электромагниты  "></Button>
             <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding MagnetometersPageCommand}"  Content=" Магнитометры  " Cursor="Hand"></Button>
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding ARSPageCommand}"  Content=" ДУС  " Cursor="Hand"></Button>
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding FlyWheelPageCommand}"  Content=" Маховики  " Cursor="Hand"></Button>
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding GyroPageCommand}"  Content=" Гиропары  " Cursor="Hand"></Button>
-            <Button Style="{StaticResource button-primary}" Width="150" Margin="2,2,1,0"  Command="{Binding SatellitePageCommand}"  Content=" КА  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="60" Margin="2,2,1,0"  Command="{Binding ARSPageCommand}"  Content=" ДУС  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="120" Margin="2,2,1,0"  Command="{Binding FlyWheelPageCommand}"  Content=" Маховики  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="110" Margin="2,2,1,0"  Command="{Binding GyroPageCommand}"  Content=" Гиропары  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="50" Margin="2,2,1,0"  Command="{Binding SunSensorPageCommand}"  Content=" СД  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="50" Margin="2,2,1,0"  Command="{Binding StarSensorPageCommand}"  Content=" ЗД  " Cursor="Hand"></Button>
+            <Button Style="{StaticResource button-primary}" Width="50" Margin="2,2,1,0"  Command="{Binding SatellitePageCommand}"  Content=" КА  " Cursor="Hand"></Button>
         </StackPanel>
         <Border Grid.Row="1" BorderThickness="1" BorderBrush="DarkGray" Margin="2" >
             <Frame  NavigationUIVisibility="Hidden" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>

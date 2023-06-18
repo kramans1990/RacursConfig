@@ -7,6 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\A.png" />
+    <None Remove="resources\angle.png" />
+    <None Remove="resources\Attitide.png" />
+    <None Remove="resources\delete.png" />
+    <None Remove="resources\icon-cancel-50.png" />
+    <None Remove="resources\icon-save-50.png" />
+    <None Remove="resources\icons-settings.png" />
+    <None Remove="resources\settings.png" />
+    <None Remove="resources\Б.png" />
+    <None Remove="resources\В.png" />
+    <None Remove="resources\Г.png" />
+    <None Remove="resources\Д.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Ракурс\Git\Racurs\Client\bin\Debug\net5.0-windows\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -19,7 +38,49 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="resources\A.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\angle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\Attitide.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\icon-cancel-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\icon-save-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\icons-settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\Б.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\В.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\Г.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\Д.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Pages\ElMagnetPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\SatellitePage1.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

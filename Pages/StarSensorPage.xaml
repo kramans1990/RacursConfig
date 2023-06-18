@@ -1,0 +1,175 @@
+﻿<Page x:Class="RacursConfig.Pages.StarSensorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RacursConfig.Pages" xmlns:controls="clr-namespace:RacursConfig.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"  Background="#EAEDF0"
+      Title="StarSensorPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type controls:NumberField}">
+            <Setter Property="Validation.ErrorTemplate" Value="{x:Null}"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="480" ></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список звездных датчиков</Label>
+        <GridSplitter Margin="0,30,0,0"></GridSplitter>
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"   ItemsSource="{Binding StarSensors}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="130" Header="Название" Binding="{Binding Name}" />
+                <DataGridTextColumn Width="130" Header="Описание" Binding="{Binding Description}"/>
+                <DataGridTextColumn Width="100" Header="Full Aperture" Binding="{Binding Full_aperture}"/>
+                <DataGridTextColumn Width="100" Header="Part Aperture" Binding="{Binding Part_aperture}"/>
+                <DataGridTextColumn Width="90" Header="Matrix Sz" Binding="{Binding Matrix_sz}"/>
+                <DataGridTextColumn Width="50" Header="Bpp" Binding="{Binding Bpp}"/>
+                <DataGridTextColumn Width="50" Header="ErrX" Binding="{Binding Err_x}"/>
+                <DataGridTextColumn Width="50" Header="ErrY" Binding="{Binding Err_y}"/>
+                <DataGridTextColumn Width="100" Header="Magnitude" Binding="{Binding Magnitude}"/>
+                <DataGridTextColumn Width="70" Header="Skew Z" Binding="{Binding Skew_z}"/>
+                <DataGridTextColumn Width="70" Header="Skew X" Binding="{Binding Skew_x}"/>
+                <DataGridTextColumn Width="50" Header="Roll" Binding="{Binding Roll}"/>
+                <DataGridTextColumn Width="80" Header="Focusdx" Binding="{Binding Focus_dx}"/>
+                <DataGridTextColumn Width="80" Header="Focusdy" Binding="{Binding Focus_dy}"/>
+                <DataGridTextColumn Width="100" Header="SkewoOptZ" Binding="{Binding Skew_opt_z}"/>
+                <DataGridTextColumn Width="100" Header="SkewpProjX" Binding="{Binding Skew_proj_x}"/>
+                <DataGridTextColumn Width="90" Header="Lambda0" Binding="{Binding Lambda_0}"/>
+                <DataGridTextColumn Width="90" Header="Klambda" Binding="{Binding K_lambda}"/>
+                <DataGridTextColumn Width="70" Header="Sigma" Binding="{Binding Sigma}"/>
+                <DataGridTemplateColumn Width="140" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"   Margin="1"   Content="Изменить" Command="{Binding DataContext.EditCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="140">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{StaticResource button-grid}"    Content="Удалить" Command="{Binding DataContext.DeleteCommand,
+                                        RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}"
+                                         />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="2" Height="40" Orientation="Horizontal">
+            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="100" Margin="40,0,2,2" Content="Добавить" Command="{Binding AddCommand}"></Button>
+
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <Grid Visibility="{Binding EditorVisibility}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>                     
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="35"></RowDefinition>
+
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="Название"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="Описание"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="Full_aperture"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Part_aperture"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Matrix_sz"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Bpp"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="Err_x"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="Err_y"></TextBlock>
+
+
+                    <TextBlock Grid.Column="4" Grid.Row="2" Text="Magnitude"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="3" Text="Skew Z"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="4" Text="Skew X"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="5" Text="Roll"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="6" Text="Focusdx"></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="7" Text="Focusdy"></TextBlock>
+
+
+                    <TextBlock Grid.Column="7" Grid.Row="2" Text="SkewOptZ"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="3" Text="SkewProjX"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="4" Text="Lambda0"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="5" Text="RoKLambdall"></TextBlock>
+                    <TextBlock Grid.Column="7" Grid.Row="6" Text="Sigma"></TextBlock>
+                 
+
+
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding StarSensorEditor.Name,Mode=TwoWay}"  MinLength="5"></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding StarSensorEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="2" Text="{Binding StarSensorEditor.Full_aperture,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="3" Text="{Binding StarSensorEditor.Part_aperture,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="4" Text="{Binding StarSensorEditor.Matrix_sz,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="5" Text="{Binding StarSensorEditor.Bpp,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="6" Text="{Binding StarSensorEditor.Err_x,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="2" Grid.Row="7" Text="{Binding StarSensorEditor.Err_y,Mode=TwoWay}"></controls:NumberField>
+
+                    <controls:NumberField Grid.Column="5" Grid.Row="2" Text="{Binding StarSensorEditor.Magnitude,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="3" Text="{Binding StarSensorEditor.Skew_z,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="4" Text="{Binding StarSensorEditor.Skew_x,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="5" Text="{Binding StarSensorEditor.Roll,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="6" Text="{Binding StarSensorEditor.Focus_dx,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="5" Grid.Row="7" Text="{Binding StarSensorEditor.Focus_dy,Mode=TwoWay}"></controls:NumberField>
+
+
+
+                    <controls:NumberField Grid.Column="8" Grid.Row="2" Text="{Binding StarSensorEditor.Skew_opt_z,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="3" Text="{Binding StarSensorEditor.Skew_proj_x,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="4" Text="{Binding StarSensorEditor.Lambda_0,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="5" Text="{Binding StarSensorEditor.K_lambda,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="8" Grid.Row="6" Text="{Binding StarSensorEditor.Sigma,Mode=TwoWay}"></controls:NumberField>
+                  
+
+                    <Button Grid.Row="9" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+                    <Button Grid.Row="9"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="2" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+        <!--<TextBox  VerticalContentAlignment="Top" TextAlignment="Left" Grid.Row="4" Text="{Binding WarningMessages, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>-->
+        <GridSplitter Margin="0,30,0,0" Grid.ColumnSpan="10"></GridSplitter>
+        <ScrollViewer Grid.Row="4">
+            <ItemsControl Background="White"   ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding}" FontSize="14" Foreground="Gray"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+
+</Page>

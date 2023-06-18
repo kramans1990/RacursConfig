@@ -34,10 +34,43 @@
     <Compile Update="Pages\MagnetometersPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SatellitePage.xaml.cs">
+    <Compile Update="Pages\SatellitePage\PositionEditors\ARSPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\ElMagnetPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\EngineEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\GyroPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\LoadEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\MagnetometerPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\StarSensorPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\SunSensorPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\SatellitteComponetsEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\FlywheelPositionEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\StarSensorPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\StationsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\SunSensorPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -75,10 +108,46 @@
     <Page Update="Pages\MagnetometersPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SatellitePage.xaml">
+    <Page Update="Pages\SatellitePage\PositionEditors\ARSPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\ElMagnetPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\EngineEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\GyroPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\LoadEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\MagnetometerPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\StarSensorPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\SunSensorPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\SatellitePage1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\SatellitteComponetsEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\FlywheelPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\StarSensorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\StationsPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SunSensorPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

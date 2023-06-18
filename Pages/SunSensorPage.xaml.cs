@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace RacursConfig.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для SatellitesPage.xaml
+    /// Логика взаимодействия для SunSensorPage.xaml
     /// </summary>
-    public partial class SatellitePage : Page
+    public partial class SunSensorPage : Page
     {
-        public SatellitePage()
+        public SunSensorPage()
         {
             InitializeComponent();
-            DataContext = new SatellitePageVM();
+            DataContext = new SunSensorPageVM();
         }
     }
 }

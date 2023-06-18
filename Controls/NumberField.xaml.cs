@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
 namespace RacursConfig.Controls
 {
     /// <summary>
@@ -30,19 +31,28 @@ namespace RacursConfig.Controls
         private SolidColorBrush noValidColor = new SolidColorBrush(Colors.Red);
         public NumberField() {
             InitializeComponent();
+           
+
             textField = textValidateField;
+            textField.TextInput += TextField_TextInput;
             textField.TextChanged += TextChanged;
+             
             textValid = textValidateBlock;
             Loaded += NumberFieldLoaded;
             textField.Text = "0";
             
         }
 
+        private void TextField_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            var text = e.Text;
+        }
 
         private void NumberFieldLoaded(object sender, RoutedEventArgs e)
         {
             textField.Text = Text;
             ValidateProperty();
+        
         }
 
 
@@ -150,6 +160,7 @@ namespace RacursConfig.Controls
      
      
         private void TextChanged(object sender, TextChangedEventArgs e){
+           
             Text = textField.Text;
             ValidateProperty();
         }

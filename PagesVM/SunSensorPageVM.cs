@@ -13,15 +13,15 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using RacursConfig.Controls;
 using System.Collections.ObjectModel;
-using RacursLib.LibMath;
+using Vector = RacursCore.types.Vector;
 
 namespace RacursConfig.PagesVM
 {
-    class MagnetometersPageVM :BaseVM
+    class SunSensorPageVM: BaseVM
     {
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/Magnetometer";      
+        private string route = "/api/SunSensor";
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
         private string getMessage = " Запрос списка электромагнитов";
@@ -29,111 +29,51 @@ namespace RacursConfig.PagesVM
         private JsonSerializerOptions options;
 
 
-        private Page _Page;
-        public Page Page
-        {
-            get { return _Page; }
-            set { _Page = value; OnPropertyChanged(nameof(Page)); }
-        }
-     
 
-        private List<Magnetometer> _Magnetometers;
-        public List<Magnetometer> Magnetometers
+
+
+        private List<SunSensor> _SunSensors;
+        public List<SunSensor> SunSensors
         {
             get
             {
-                return _Magnetometers;
+                return _SunSensors;
             }
             set
             {
-                _Magnetometers = value;
-                OnPropertyChanged(nameof(Magnetometers));
+                _SunSensors = value;
+                OnPropertyChanged(nameof(SunSensors));
             }
         }
 
-        private Magnetometer _SelectedMagnetometer;
-        public Magnetometer SelectedMagnetometer
+
+        private SunSensor _SunSensorEditor;
+        public SunSensor SunSensorEditor
         {
             get
             {
-                return _SelectedMagnetometer;
+                return _SunSensorEditor;
             }
             set
             {
-                _SelectedMagnetometer = value;
-                OnPropertyChanged(nameof(SelectedMagnetometer));
+                _SunSensorEditor = value;
+                OnPropertyChanged(nameof(SunSensor));
             }
         }
 
-        private Magnetometer _MagnetometerEditor;
-        public Magnetometer MagnetometerEditor
+
+        public SunSensorPageVM()
         {
-            get
-            {
-                return _MagnetometerEditor;
-            }
-            set
-            {
-                _MagnetometerEditor = value;
-                OnPropertyChanged(nameof(MagnetometerEditor));
-            }
-        }
-
-        private Matrix3 _Attm;
-        public Matrix3 Attm
-        {
-            get
-            {
-                return _Attm;
-            }
-            set
-            {
-                _Attm = value;
-                OnPropertyChanged(nameof(Attm));
-            }
-        }
-
-        private Matrix3 _Skew;
-        public Matrix3 Skew
-        {
-            get
-            {
-                return _Skew;
-            }
-            set
-            {
-                _Skew = value;
-                OnPropertyChanged(nameof(Skew));
-            }
-        }
-
-        private Attitude _Att;
-        public Attitude Att
-        {
-            get
-            {
-                return _Att;
-            }
-            set
-            {
-                _Att = value;
-                OnPropertyChanged(nameof(Att));
-            }
-        }
-
-       
-
-        public MagnetometersPageVM() {
             EditorVisibility = Visibility.Hidden;
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(App.baseUrl);
-            getMagnetometers();
-            SelectedMagnetometer = new Magnetometer();           
+            getFlyheels();
+         
             AddCommand = new RelayCommand(x => Add());
             CancelCommand = new RelayCommand(x => Cancel());
             DeleteCommand = new RelayCommand(x => Delete(x));
-            SaveCommand = new RelayCommand(x => Save(),p=>canSave());
-            MagnetometerEditor = new Magnetometer();
+            SaveCommand = new RelayCommand(x => Save(), p => canSave());
+            SunSensorEditor = new SunSensor();
             EditCommand = new RelayCommand(x => Edit(x));
             Messages = new ObservableCollection<string>();
             options = new JsonSerializerOptions
@@ -149,9 +89,10 @@ namespace RacursConfig.PagesVM
             var frame = FindVisualChildren<Frame>((do_));
             List<NumberField> fieldsNum = FindVisualChildren<NumberField>(frame.First()).ToList<NumberField>();
             var find_FalseNum = fieldsNum.Where(p => p.IsValid == false);
-            bool result =  find_FalseNum.Count() == 0 ? true : false;
+            bool result = find_FalseNum.Count() == 0 ? true : false;
 
-            if (!result) {
+            if (!result)
+            {
                 return result;
             }
 
@@ -162,17 +103,13 @@ namespace RacursConfig.PagesVM
             return resultText;
         }
 
-        private void Edit(object magnetometer)
+        private void Edit(object wheel)
         {
-            
-            // Magnetometers = JsonSerializer.Deserialize<Magnetometer>(result.Result, options);
-            string s = JsonConvert.SerializeObject(magnetometer);
-            MagnetometerEditor = JsonSerializer.Deserialize<Magnetometer>(s, options);
-            //Att = MagnetometerEditor.Att;
-            //Attm = MagnetometerEditor.Attm;
-            //Skew = MagnetometerEditor.Skew;
+
+            string s = JsonConvert.SerializeObject(wheel);
+            SunSensorEditor = JsonSerializer.Deserialize<SunSensor>(s, options);           
             EditorVisibility = Visibility.Visible;
-            mode = "Edit";          
+            mode = "Edit";
 
 
         }
@@ -184,71 +121,68 @@ namespace RacursConfig.PagesVM
         {
             if (mode == "Add")
             {
-                AddMagnetometerToDataBase(MagnetometerEditor);
+                AddSunSensorToDataBase(SunSensorEditor);
             }
             if (mode == "Edit")
             {
-                EditMagnetometer(MagnetometerEditor);
+                EditSunSensor(SunSensorEditor);
             }
         }
         private void Add()
-        {   
+        {
             EditorVisibility = Visibility.Visible;
             mode = "Add";
-            Attm = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Skew = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
-            Att = new Attitude(0, 0, 0, 0);
-            MagnetometerEditor = new Magnetometer();
-          
+           
+            SunSensorEditor = new SunSensor();
+
         }
-        private async void Delete(object magnetometer)
+        private async void Delete(object ElMagnet)
         {
             EditorVisibility = Visibility.Hidden;
             try
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, route);
-                string content = JsonConvert.SerializeObject(magnetometer);
+                string content = JsonConvert.SerializeObject(ElMagnet);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     Messages.Add(GetTimeLabel() + deleteMessage);
-                    getMagnetometers();
+                    getFlyheels();
 
                 }
-               else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
+                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-               Messages.Add(GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void EditMagnetometer(Magnetometer magnetometer)
+        private async void EditSunSensor(SunSensor sunSensor)
         {
             try
-            {   
-                //magnetometer.Att = Att;
-                //magnetometer.Attm=Attm;
-                //magnetometer.Skew = Skew;
+            {
+
+               
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, route);
-                string content = JsonConvert.SerializeObject(magnetometer);
+                string content = JsonConvert.SerializeObject(sunSensor);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     EditorVisibility = Visibility.Hidden;
                     Messages.Add(GetTimeLabel() + editMessage);
-                    getMagnetometers();
+                    getFlyheels();
 
                 }
-               else {Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
+                else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-                    Messages.Add(GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void getMagnetometers()
+        private async void getFlyheels()
         {
             try
             {
@@ -256,43 +190,42 @@ namespace RacursConfig.PagesVM
                 if (response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync();
-                    Messages.Add(GetTimeLabel() + getMessage);                  
-                    Magnetometers = JsonSerializer.Deserialize<List<Magnetometer>>(result.Result,options);                    
+                    Messages.Add(GetTimeLabel() + getMessage);
+                    SunSensors = JsonSerializer.Deserialize<List<SunSensor>>(result.Result, options);
                 }
-              else { Messages.Add(response.ReasonPhrase); }
+                else { Messages.Add(response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-               Messages.Add(GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-        private async void AddMagnetometerToDataBase(Magnetometer magnetometer)
+        private async void AddSunSensorToDataBase(SunSensor sunSensor)
         {
             try
             {
-                //magnetometer.Skew = Skew;
-                //magnetometer.Attm = Attm;
-                magnetometer.Att = Att;
-                string content = JsonConvert.SerializeObject(magnetometer);
-                //content = System.Text.Json.JsonSerializer.Serialize(magnetometer);
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/magnetometers");
+
+             
+                string content = JsonConvert.SerializeObject(sunSensor);
+                //content = System.Text.Json.JsonSerializer.Serialize(ARS);
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, route);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
                     EditorVisibility = Visibility.Hidden;
                     Messages.Add(GetTimeLabel() + addMessage);
-                    getMagnetometers();
+                    getFlyheels();
 
                 }
                 else { Messages.Add(GetTimeLabel() + response.ReasonPhrase); }
             }
             catch (Exception exception)
             {
-                 Messages.Add(GetTimeLabel() + exception.Message);
+                Messages.Add(GetTimeLabel() + exception.Message);
             }
         }
-       
+
     }
-   
 }
+

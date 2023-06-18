@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox   BorderThickness="2" BorderBrush="Gray"  Text="{Binding Text, ElementName=numberFieldControl,UpdateSourceTrigger=PropertyChanged}"   x:Name="textValidateField">
+        <TextBox   BorderThickness="2" BorderBrush="Gray"  Text="{Binding Text, ElementName=numberFieldControl}"   x:Name="textValidateField">
             <!--<TextBox.Resources>
                 <--><!--Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3"/>                  
