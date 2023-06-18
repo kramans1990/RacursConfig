@@ -103,11 +103,11 @@
                     <TextBlock Grid.Column="1" Grid.Row="3" Text="Vector X1"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Vector X2"></TextBlock>
 
-                    <TextBlock Grid.Column="1" Grid.Row="5" Text="Vector Y1"></TextBlock>
+                    <!--<TextBlock Grid.Column="1" Grid.Row="5" Text="Vector Y1"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="6" Text="Vector Y2"></TextBlock>
 
                     <TextBlock Grid.Column="1" Grid.Row="7" Text="Vector Z1"></TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="8" Text="Vector Z2"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="Vector Z2"></TextBlock>-->
 
                     <TextBlock Grid.Column="2" HorizontalAlignment="Center" Grid.Row="2" Text="X"></TextBlock>
                     <TextBlock Grid.Column="3" HorizontalAlignment="Center"  Grid.Row="2" Text="Y"></TextBlock>
@@ -151,7 +151,7 @@
                     </ComboBox>
                    
 
-                    <ComboBox Grid.Column="2" Grid.Row="5" SelectedItem="{Binding GyroVectorY.Vector1.X}">
+                    <!--<ComboBox Grid.Column="2" Grid.Row="5" SelectedItem="{Binding GyroVectorY.Vector1.X}">
                         <system:Double>1</system:Double>
                         <system:Double>0</system:Double>
                         <system:Double>-1</system:Double>
@@ -211,7 +211,7 @@
                         <system:Double>1</system:Double>
                         <system:Double>0</system:Double>
                         <system:Double>-1</system:Double>
-                    </ComboBox>
+                    </ComboBox>-->
 
 
 
