@@ -4,28 +4,21 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using System.Windows.Data;
 
-namespace RacursConfig.Pages.SatellitePage
+namespace RacursConfig.Controls
 {
-  
-    class TypeToEnabledValueConverter : IValueConverter
+    class NumberFieldEnabledToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {   
-            string[] types = parameter.ToString().Split('-');
-            if (types.Contains(value.ToString().ToLower()))
-            {
-                return true;
-            }
-            return false;
+        {
+             return (bool)value == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+           throw new NotImplementedException();
         }
     }
 }

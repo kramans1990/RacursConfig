@@ -41,6 +41,6 @@
 
         <Image Grid.Column="1" Width="400" Height="300"  Grid.Row="6" Grid.ColumnSpan="6" Source="pack://Application:,,,/resources/Attitide.png"></Image>
         <Button Style="{StaticResource button-primary}"  Grid.Row="7" Grid.Column="2" Command="{Binding OKCommand}">OK</Button>
-        <Button Style="{StaticResource button-primary}" Grid.Row="7" Grid.Column="4" Cursor="Hand">Отмена</Button>
+        <Button Style="{StaticResource button-primary}" Grid.Row="7" Grid.Column="4" Command="{Binding CancelCommand}" Cursor="Hand">Отмена</Button>
     </Grid>
 </Window>

@@ -70,8 +70,8 @@
                 <Grid Visibility="{Binding EditorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"></ColumnDefinition>
-                        <ColumnDefinition Width="130"></ColumnDefinition>
-                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
+                        <ColumnDefinition Width="0"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
@@ -109,7 +109,7 @@
                     <TextBlock Grid.Column="8" Grid.Row="2" Text="W"></TextBlock>-->
 
 
-                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0" Text="{Binding ARSEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="0" Text="{Binding ARSEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
                     <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding ARSEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
 
                     <!--<controls:NumberField Grid.Column="3" Grid.Row="2" Text="{Binding Path =Att.X,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="True" ValidationMin="0" ValidationMax="1"></controls:NumberField>
@@ -128,22 +128,22 @@
 
 
 
-                    <TextBlock Grid.Column="7" Grid.Row="0" Text="ADCMax"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="1" Text="Wmax"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="2" Text="Bias"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="3" Text="BiasSd"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="4" Text="DeadZone"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="5" Text="MagnSens"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="6" Text="Error"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="ADCMax"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="Wmax"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="Bias"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="BiasSd"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="DeadZone"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="7" Text="MagnSens"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="8" Text="Error"></TextBlock>
 
 
-                    <controls:NumberField Grid.Column="8" Grid.Row="0" Text="{Binding ARSEditor.ADC_max, Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="1" Text="{Binding ARSEditor.w_max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="2" Text="{Binding ARSEditor.bias,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="3" Text="{Binding ARSEditor.bias_sd,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="4" Text="{Binding ARSEditor.dead_zone,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="5" Text="{Binding ARSEditor.magn_sens,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="6" Text="{Binding ARSEditor.error,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="2" Text="{Binding ARSEditor.ADC_max, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="3" Text="{Binding ARSEditor.w_max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="4" Text="{Binding ARSEditor.bias,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="5" Text="{Binding ARSEditor.bias_sd,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="6" Text="{Binding ARSEditor.dead_zone,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="7" Text="{Binding ARSEditor.magn_sens,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="3" Grid.Row="8" Text="{Binding ARSEditor.error,Mode=TwoWay}"></controls:NumberField>
                    
                  
 

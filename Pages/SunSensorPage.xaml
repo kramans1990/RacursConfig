@@ -24,7 +24,7 @@
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label HorizontalAlignment="Center" Grid.Row="0">Список Датчиков Угловых Скоростей</Label>
+        <Label HorizontalAlignment="Center" Grid.Row="0">Список солнечных датчиков</Label>
         <GridSplitter Margin="0,30,0,0"></GridSplitter>
         <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"   ItemsSource="{Binding SunSensors}">
             <DataGrid.Columns>
@@ -67,7 +67,7 @@
                 <Grid Visibility="{Binding EditorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"></ColumnDefinition>
-                        <ColumnDefinition Width="130"></ColumnDefinition>                      
+                        <ColumnDefinition Width="100"></ColumnDefinition>                      
                         <ColumnDefinition Width="160"></ColumnDefinition>                      
                         <ColumnDefinition Width="160"></ColumnDefinition>                      
                         <ColumnDefinition Width="160"></ColumnDefinition>
@@ -98,7 +98,7 @@
 
 
 
-                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="0" Text="{Binding SunSensorEditor.Name,Mode=TwoWay}"  MinLength="5"></controls:TextField>
+                    <controls:TextField   Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="0" Text="{Binding SunSensorEditor.Name,Mode=TwoWay}"  MinLength="5"></controls:TextField>
                     <controls:TextField  Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding SunSensorEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
                     <controls:NumberField Grid.Column="2" Grid.Row="2" Text="{Binding SunSensorEditor.Angle_x,Mode=TwoWay}"></controls:NumberField>
                     <controls:NumberField Grid.Column="2" Grid.Row="3" Text="{Binding SunSensorEditor.Angle_y,Mode=TwoWay}"></controls:NumberField>

@@ -61,7 +61,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="2" Height="60" Orientation="Horizontal">
-            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="140"  Height="40" Margin="40,2,2,0" Content="Добавить" Command="{Binding AddCommand}"></Button>  
+            <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="120"  Height="40" Margin="40,2,2,0" Content="Добавить" Command="{Binding AddCommand}"></Button>  
         </StackPanel>
         <StackPanel Grid.Row="3">
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
@@ -140,11 +140,12 @@
 
 
 
-                    <controls:NumberField  Grid.Column="3"  Grid.Row="0" Text="{Binding SatelliteEditor.Number,Mode=TwoWay}"  ValidationMin="1" ValidationMax="9999" RangeValidation="True"></controls:NumberField>
+                    <controls:NumberField  Grid.Column="3"  Grid.Row="0" Text="{Binding SatelliteEditor.Number,Mode=TwoWay}"  ValidationMin="1" ValidationMax="9999" RangeValidation="True" IsInt="True"></controls:NumberField>
                     <controls:NumberField  Grid.Column="3"  Grid.Row="1" Text="{Binding SatelliteEditor.Norad,Mode=TwoWay}"  ValidationMin="1" ValidationMax="99999" RangeValidation="True" ></controls:NumberField>
                     <controls:TextField    Grid.Column="3" Grid.Row="2" Text="{Binding SatelliteEditor.Name,Mode=TwoWay}" MinLength="0"></controls:TextField>
                     <controls:TextField    Grid.Column="3" Grid.ColumnSpan="6" Grid.Row="3" Text="{Binding SatelliteEditor.Description,Mode=TwoWay}" MinLength="10"></controls:TextField>
-                    
+                    <controls:NumberField  Grid.Column="3"  Grid.Row="4" Text="{Binding SatelliteEditor.Mass,Mode=TwoWay}"  ValidationMin="1" ValidationMax="99999" RangeValidation="True" ></controls:NumberField>
+
 
 
                     <ComboBox SelectedValuePath="Content" SelectedValue="{Binding  Path= SatelliteEditor.SatelliteType ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Grid.Row="6" Grid.Column="3">
@@ -155,8 +156,12 @@
                         <ComboBoxItem>Д</ComboBoxItem>
                     </ComboBox>
                     <Image Width="500" Height="300" Stretch="Uniform"  Source="{Binding Path=SatelliteEditor.SatelliteType, Converter={StaticResource converter}}"  Grid.ColumnSpan="6"  Grid.Column="3" Grid.Row="6" Grid.RowSpan="10" ></Image>
-                    <controls:NumberField  Grid.Column="12"  Grid.Row="2" Text="{Binding SatelliteEditor.C,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter}, ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
-                    <controls:NumberField  Grid.Column="12"  Grid.Row="0" Text="{Binding SatelliteEditor.A,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="2" Text="{Binding SatelliteEditor.C,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter}, ConverterParameter=a-б-в-г-д}" >
+                        
+                    </controls:NumberField>
+                    <controls:NumberField  Grid.Column="12"  Grid.Row="0" Text="{Binding SatelliteEditor.A,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" >
+                       
+                    </controls:NumberField>
                     <controls:NumberField  Grid.Column="12"  Grid.Row="1" Text="{Binding SatelliteEditor.B,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
                     <controls:NumberField  Grid.Column="12"  Grid.Row="2" Text="{Binding SatelliteEditor.C,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True"  IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г-д}" ></controls:NumberField>
                     <controls:NumberField  Grid.Column="12"  Grid.Row="3" Text="{Binding SatelliteEditor.D,Mode=TwoWay}"  ValidationMin="1" ValidationMax="10000" RangeValidation="True" IsEnabled="{Binding  SatelliteEditor.SatelliteType, Converter={StaticResource typeToEnableConverter},  ConverterParameter=a-б-в-г}" ></controls:NumberField>
@@ -200,9 +205,17 @@
                 </Grid>
             </ScrollViewer>
         </StackPanel>
-      
 
-        <StackPanel Background="Azure" Grid.Row="4"></StackPanel>
+
+        <ScrollViewer Grid.Row="4">
+            <ItemsControl Background="White"   ItemsSource="{Binding Messages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding}" FontSize="14" Foreground="Gray"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 
 </Page>

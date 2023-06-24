@@ -7,7 +7,7 @@
              mc:Ignorable="d" x:Name="numberFieldControl"
              >
     <UserControl.Resources>
-      
+        <local:NumberFieldEnabledToVisibilityConverter x:Key="converter"></local:NumberFieldEnabledToVisibilityConverter>
     </UserControl.Resources>
     <Grid>
         
@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="30"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox   BorderThickness="2" BorderBrush="Gray"  Text="{Binding Text, ElementName=numberFieldControl}"   x:Name="textValidateField">
+        <TextBox    BorderThickness="2" BorderBrush="Gray"  Text="{Binding Text, ElementName=numberFieldControl}"   x:Name="textValidateField">
             <!--<TextBox.Resources>
                 <--><!--Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3"/>                  
@@ -25,7 +25,7 @@
            
           
         </TextBox>
-    <TextBlock   Grid.Column="1" x:Name="textValidateBlock" TextAlignment="Left" ></TextBlock>
+    <TextBlock    Grid.Column="1" x:Name="textValidateBlock" TextAlignment="Left" Visibility="{Binding IsEnabled, ElementName=numberFieldControl,Converter={StaticResource converter}, UpdateSourceTrigger=PropertyChanged}" ></TextBlock>
        
     </Grid>
 

@@ -419,6 +419,7 @@
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
                 </Setter.Value>
             </Setter>
+            <Setter Property="ToolTip" Value="Компонент в работе"></Setter>
         </Style>
         <!--<Style TargetType="{x:Type Button}" BasedOn="{StaticResource baseStyle}"></Style>-->
         <!--<Style TargetType="{x:Type Label}" BasedOn="{StaticResource baseStyle}"></Style>

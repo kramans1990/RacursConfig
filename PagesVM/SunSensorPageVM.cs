@@ -24,7 +24,7 @@ namespace RacursConfig.PagesVM
         private string route = "/api/SunSensor";
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
-        private string getMessage = " Запрос списка электромагнитов";
+        private string getMessage = " Запрос списка СД";
         private string editMessage = " Запись успешно изменена";
         private JsonSerializerOptions options;
 

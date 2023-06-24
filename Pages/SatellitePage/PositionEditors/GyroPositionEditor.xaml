@@ -30,7 +30,7 @@
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="3">ось суммарного кинетического момента пары роторов</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5" Text="                Ось суммарного кинетического момента пары роторов"></TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">X:</TextBlock>
         <controls:NumberField x:Name="rx" RangeValidation="True" ValidationMin="-1" ValidationMax="1" Grid.Row="2" Grid.Column="2" ></controls:NumberField>
         <TextBlock Grid.Row="2"  HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="3">Y:</TextBlock>
@@ -53,7 +53,7 @@
         <TextBlock Grid.Row="6"   HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="3">lamda:</TextBlock>
         <controls:NumberField RangeValidation="True"  x:Name="GammaField"  ValidationMin="0" ValidationMax="360" Grid.Row="6" Grid.Column="4" ></controls:NumberField>
          <Button Style="{StaticResource button-primary}"  Grid.Row="9" Grid.Column="2" Command="{Binding OKCommand}">OK</Button>
-        <Button Style="{StaticResource button-primary}" Grid.Row="9" Grid.Column="4" Cursor="Hand">Отмена</Button>
+        <Button Style="{StaticResource button-primary}" Grid.Row="9" Grid.Column="4" Command="{Binding CancelCommand}" Cursor="Hand">Отмена</Button>
     </Grid>
 </Window>
 

@@ -24,7 +24,7 @@ namespace RacursConfig.PagesVM
         private string route = "/api/gyro";      
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
-        private string getMessage = " Запрос списка ДУС";
+        private string getMessage = " Запрос списка Гиропар";
         private string editMessage = " Запись успешно изменена";
         private JsonSerializerOptions options;
 

@@ -12,7 +12,7 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -39,6 +39,6 @@
 
 
         <Button Style="{StaticResource button-primary}"  Grid.Row="4" Grid.Column="2" Command="{Binding OKCommand}">OK</Button>
-        <Button Style="{StaticResource button-primary}" Grid.Row="4" Grid.Column="4" Cursor="Hand">Отмена</Button>
+        <Button Style="{StaticResource button-primary}" Grid.Row="4" Grid.Column="4" Command="{Binding CancelCommand}" Cursor="Hand">Отмена</Button>
     </Grid>
 </Window>

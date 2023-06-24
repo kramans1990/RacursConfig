@@ -16,6 +16,10 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
         {
             get; set;
         }
+        public RelayCommand CancelCommand
+        {
+            get; set;
+        }
         public SunSensorPositionEditor(Attitude att)
         {
             Att = att;
@@ -25,8 +29,14 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
             z.Text = att.Z.ToString();
             w.Text = att.W.ToString();
             OKCommand = new RelayCommand(p => OK(), p => canOk());
+            CancelCommand = new RelayCommand(p => Cancel());
             DataContext = this;
 
+        }
+
+        private void Cancel()
+        {
+            this.Close();
         }
 
         private void OK()

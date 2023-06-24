@@ -20,32 +20,13 @@ namespace RacursConfig.Pages.SatellitePage
 {
     public class SatelliteComponentEditorVM : BaseVM
     {
-        private HttpClient httpClient;
-        private string mode;
-        private string routeSatellite = "api/Satellite";
-        //private string routeFlyWheels = "/api/Flywheel";
-        private string deleteMessage = " Запись успешно удалена";
-        private string addMessage = " Запись успешно добавлена";
-        private string getMessage = " Запрос списка спутников";
-        private string editMessage = " Запись успешно изменена";
+
         private JsonSerializerOptions options;
 
+        public Satellite model { get; set; }
 
 
-
-        private Satellite _SelectedSatellite;
-        public Satellite SelectedSatellite
-        {
-            get
-            {
-                return _SelectedSatellite;
-            }
-            set
-            {
-                _SelectedSatellite = value;
-                OnPropertyChanged(nameof(SelectedSatellite));
-            }
-        }
+       
 
         private Satellite _SatelliteEditor;
         public Satellite SatelliteEditor
@@ -137,9 +118,18 @@ namespace RacursConfig.Pages.SatellitePage
         {
             get; set;
         }
+        public RelayCommand OKCommand
+        {
+            get; set;
+        }
+        public RelayCommand CancelCommand
+        {
+            get; set;
+        }
         public SatelliteComponentEditorVM(Satellite satellite)
         {
-            
+     
+            SatelliteEditor = satellite;
             DeleteSmallSatCommand = new RelayCommand(x => DeleteSmallSat(x));
             DeleteMicroSatCommand = new RelayCommand(x => DeleteMicroSat(x));
             DeleteMagnetometerCommand = new RelayCommand(x => DeleteMagnetometer(x));
@@ -158,14 +148,32 @@ namespace RacursConfig.Pages.SatellitePage
             EditSunSensorPositionCommand = new RelayCommand(x => EditSunSensorPosition(x));
             EditEngineCommand = new RelayCommand(x=>EditEngine());
             EditLoadCommand = new RelayCommand(x => EditLoad());
-            //OpenSattelliteModelEdtorCommand = new RelayCommand(x => OpenModelEditor());
-            //Messages = new ObservableCollection<string>();
-            //options = new JsonSerializerOptions
-            //{
-            //    PropertyNameCaseInsensitive = true
-            //};
-            SatelliteEditor =  satellite;
+            OKCommand = new RelayCommand(x => SaveChanges(x));
+            CancelCommand = new RelayCommand(x => Exit(x));
+
+
+            
+          
             //SatelliteEditor.Ssat1 = null;
+        }
+
+        private void Exit(object x)
+        {
+            Window window = x as Window; if (window != null)
+            {
+                SatelliteEditor = model;
+                var t = 0;
+                window.Close();
+            }         
+           
+        }
+
+        private void SaveChanges(object x)
+        {
+            Window window = x as Window; if (window != null)
+            {
+                window.DialogResult = true;
+            }
         }
 
         private void EditSunSensorPosition(object x)
@@ -211,7 +219,7 @@ namespace RacursConfig.Pages.SatellitePage
 
         private void DeleteSunSensor(object x)
         {
-            StarSensorModel model = (StarSensorModel)(x);
+            SunSensorModel model = (SunSensorModel)(x);
             int slot = model.Slot;
             switch (slot)
             {

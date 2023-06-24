@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacursConfig.Pages.SatellitePage"
-        mc:Ignorable="d"
+        mc:Ignorable="d" x:Name="Editor"
        
         Title="SatellitteComponetsEditor"  WindowState="Maximized">
     <Window.Resources>
@@ -710,7 +710,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -737,7 +737,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -763,7 +763,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -953,6 +953,8 @@
 
             </Border>
 
+            <Button Canvas.Left="40" Canvas.Bottom="40" Height="50" Style="{StaticResource button-primary}"  Width ="140" Content="ОК" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=Editor}"></Button>
+            <Button Canvas.Left="220" Canvas.Bottom="40" Height="50" Style="{StaticResource button-primary}"  Width ="140" Content="Отмена" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Editor}"></Button>
         </Canvas>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
@@ -960,8 +962,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.ColumnSpan="2" Height="50" Margin="0,0,616,0" VerticalAlignment="Top">ОК</Button>
-            <Button Grid.Row="4">Отмена</Button>
+            <!--<Button Grid.ColumnSpan="2" Height="50" Margin="0,0,616,0" VerticalAlignment="Top">ОК</Button>
+            <Button Grid.Row="4">Отмена</Button>-->
         </Grid>
        
     </Grid>

@@ -21,10 +21,10 @@ namespace RacursConfig.PagesVM
     {
         private HttpClient httpClient;
         private string mode;
-        private string route = "/api/Magnetometer";      
+        private string route = "/api/magnetometer";      
         private string deleteMessage = " Запись успешно удалена";
         private string addMessage = " Запись успешно добавлена";
-        private string getMessage = " Запрос списка электромагнитов";
+        private string getMessage = " Запрос списка магнетометров";
         private string editMessage = " Запись успешно изменена";
         private JsonSerializerOptions options;
 
@@ -275,7 +275,7 @@ namespace RacursConfig.PagesVM
                 magnetometer.Att = Att;
                 string content = JsonConvert.SerializeObject(magnetometer);
                 //content = System.Text.Json.JsonSerializer.Serialize(magnetometer);
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "/api/magnetometers");
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, route);
                 request.Content = new StringContent(content, Encoding.UTF8, "application/json");
                 var response = await httpClient.SendAsync(request);
                 if (response.IsSuccessStatusCode)

@@ -28,6 +28,10 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
         {
             get; set;
         }
+        public RelayCommand CancelCommand
+        {
+            get; set;
+        }
         public GyroPositionEditor(RacursCore.types.Vector axisG, RacursCore.types.Vector axisR, double teta, double lambda)
         {
             InitializeComponent();
@@ -43,8 +47,14 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
             ry.Text = axisR.Y.ToString();
             rz.Text = axisR.Z.ToString();
             OKCommand = new RelayCommand(p => OK(), p => canOk());
+            CancelCommand = new RelayCommand(p => Cancel());
             DataContext = this;
 
+        }
+
+        private void Cancel()
+        {
+            this.Close();
         }
 
         private void OK()

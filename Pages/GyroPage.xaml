@@ -19,7 +19,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition MinHeight="300"></RowDefinition>
+            <RowDefinition MinHeight="200"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="480" ></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
@@ -75,11 +75,10 @@
                         <ColumnDefinition Width="130"></ColumnDefinition>
                         <ColumnDefinition Width="180"></ColumnDefinition>
                         <ColumnDefinition Width="180"></ColumnDefinition>
-                        <ColumnDefinition Width="180"></ColumnDefinition>
-                        <ColumnDefinition Width="190"></ColumnDefinition>
+                        <ColumnDefinition Width="180"></ColumnDefinition>                      
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="120"></ColumnDefinition>
-                        <ColumnDefinition Width="200"></ColumnDefinition>
+                        <ColumnDefinition Width="160"></ColumnDefinition>
 
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -114,7 +113,7 @@
                     <TextBlock Grid.Column="4" HorizontalAlignment="Center" Grid.Row="2" Text="Z"></TextBlock>
 
  
-                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding GyroEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
+                    <controls:TextField  Grid.Column="2" Grid.ColumnSpan="1" Grid.Row="0" Text="{Binding GyroEditor.Name,Mode=TwoWay}"  MinLength="5" IsValid="{Binding Path=validationFieldsList[0], Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></controls:TextField>
                     <controls:TextField  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding GyroEditor.Description,Mode=TwoWay}" MinLength="10" ></controls:TextField>
 
                     <ComboBox Grid.Column="2" Grid.Row="3" SelectedItem="{Binding GyroVectorX.Vector1.X}">
@@ -224,26 +223,26 @@
 
 
 
-                    <TextBlock Grid.Column="7" Grid.Row="0" Text="J"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="1" Text="Jg"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="2" Text="KPw"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="3" Text="Wr_Max"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="4" Text="Wg_Max"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="5" Text="P_Max"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="6" Text="I_Max"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="7" Text="I_dotMax"></TextBlock>
-                    <TextBlock Grid.Column="7" Grid.Row="8" Text="U_Max"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="0" Text="J"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="1" Text="Jg"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="2" Text="KPw"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="3" Text="Wr_Max"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="4" Text="Wg_Max"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="5" Text="P_Max"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="6" Text="I_Max"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="7" Text="I_dotMax"></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="8" Text="U_Max"></TextBlock>
 
 
-                    <controls:NumberField Grid.Column="8" Grid.Row="0" Text="{Binding GyroEditor.J, Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="1" Text="{Binding GyroEditor.Jg,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="2" Text="{Binding GyroEditor.KPw,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="3" Text="{Binding GyroEditor.Wr_Max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="4" Text="{Binding GyroEditor.Wg_Max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="5" Text="{Binding GyroEditor.P_Max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="6" Text="{Binding GyroEditor.I_Max,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="7" Text="{Binding GyroEditor.I_dotMax,Mode=TwoWay}"></controls:NumberField>
-                    <controls:NumberField Grid.Column="8" Grid.Row="8" Text="{Binding GyroEditor.U_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="0" Text="{Binding GyroEditor.J, Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="1" Text="{Binding GyroEditor.Jg,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="2" Text="{Binding GyroEditor.KPw,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="3" Text="{Binding GyroEditor.Wr_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="4" Text="{Binding GyroEditor.Wg_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="5" Text="{Binding GyroEditor.P_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="6" Text="{Binding GyroEditor.I_Max,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="7" Text="{Binding GyroEditor.I_dotMax,Mode=TwoWay}"></controls:NumberField>
+                    <controls:NumberField Grid.Column="7" Grid.Row="8" Text="{Binding GyroEditor.U_Max,Mode=TwoWay}"></controls:NumberField>
 
 
 

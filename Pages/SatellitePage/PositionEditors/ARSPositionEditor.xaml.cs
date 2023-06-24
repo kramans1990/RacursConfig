@@ -26,6 +26,10 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
         {
             get; set;
         }
+        public RelayCommand CancelCommand
+        {
+            get; set;
+        }
         public ARSPositionEditor(RacursCore.types.Vector vector)
         {
             InitializeComponent();
@@ -34,8 +38,14 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
             y.Text = Axis.Y.ToString();
             z.Text = Axis.Z.ToString();
             OKCommand = new RelayCommand(p => OK(), p => canOk());
+            CancelCommand = new RelayCommand(p => Cancel());
             DataContext = this;
 
+        }
+
+        private void Cancel()
+        {
+            this.Close();
         }
 
         private void OK()

@@ -1,6 +1,8 @@
 ﻿
 using System;
 using System.ComponentModel;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,7 +14,7 @@ namespace RacursConfig.Controls
     /// </summary>
     public partial class NumberField : UserControl,INotifyPropertyChanged
     {
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName = "")
@@ -22,7 +24,8 @@ namespace RacursConfig.Controls
         }
 
 
-        private string parseError = "Ожидается числовое значение"; 
+        private string parseError = "Ожидается числовое значение";
+        private string parseIntError = "Ожидается целое числовое значение";
         private TextBox textField;
         private TextBlock textValid;
         private string notValidText = "  ❗";
@@ -40,7 +43,14 @@ namespace RacursConfig.Controls
             textValid = textValidateBlock;
             Loaded += NumberFieldLoaded;
             textField.Text = "0";
+            PreviewTextInput += NumberField_PreviewTextInput;
             
+        }
+
+        private void NumberField_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.-]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void TextField_TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -76,10 +86,23 @@ namespace RacursConfig.Controls
 
         private void ValidateProperty()
         { 
-            double value;         
-            bool result = double.TryParse(Text, out value);
+            double value;
+            int valueInt;
+
+            textValid.Visibility = this.IsEnabled ? Visibility.Visible : Visibility.Collapsed;
+
+            bool resultDouble = double.TryParse(Text,System.Globalization.NumberStyles.Any,CultureInfo.InvariantCulture, out value);
+            bool resultInt = int.TryParse(Text, out valueInt);
+
+            if (!resultInt && IsInt)
+            {
+                IsValid = false;
+                animatetextFieldNotValid(parseIntError);
+                return;
+            }
            
-            if (!result)
+
+            if (!resultDouble)
             {   
                 IsValid = false;               
                 animatetextFieldNotValid(parseError);               
@@ -91,13 +114,20 @@ namespace RacursConfig.Controls
                 animatetextFieldValid();
                 return;
             }
+
+            if (valueInt > ValidationMax || valueInt < ValidationMin)
+            {
+                string intervalError = "Ожидается целое числовое значение в интервале [" + ValidationMin + ";" + ValidationMax + "]";
+                animatetextFieldNotValid(intervalError);
+                return;
+            }
             if (value > ValidationMax || value < ValidationMin) {
-                  string intervalError = "Ожидается числовое значение в интервале [" + ValidationMin + ";" + ValidationMax + "]";
-                 
+                  string intervalError = "Ожидается  числовое значение в интервале [" + ValidationMin + ";" + ValidationMax + "]";                 
                   animatetextFieldNotValid(intervalError);               
                 return;
             }
-           
+            
+
             //
             animatetextFieldValid();
         }
@@ -144,6 +174,18 @@ namespace RacursConfig.Controls
         // Using a DependencyProperty as the backing store for RangeValidation.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RangeValidationProperty =
             DependencyProperty.Register("RangeValidation", typeof(bool), typeof(NumberField), new PropertyMetadata(false));
+
+
+
+        public bool IsInt
+        {
+            get { return (bool)GetValue(IsIntProperty); }
+            set { SetValue(IsIntProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsInt.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsIntProperty =
+            DependencyProperty.Register("IsInt", typeof(bool), typeof(NumberField), new PropertyMetadata(false));
 
 
 
