@@ -125,7 +125,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ЗД1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -152,7 +152,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ЗД2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -178,7 +178,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ЗД3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -205,7 +205,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ЗД4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -238,7 +238,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -264,7 +264,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -291,7 +291,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -317,7 +317,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -344,7 +344,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor5,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД5</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor5,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS5</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -370,7 +370,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor6,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">СД6</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor6,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS6</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -405,7 +405,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SSat1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -432,7 +432,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SSat2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -458,7 +458,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SSat3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -484,7 +484,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SSat4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -710,7 +710,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -737,7 +737,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -763,7 +763,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM-1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>

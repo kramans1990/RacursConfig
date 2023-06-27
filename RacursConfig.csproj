@@ -80,7 +80,7 @@
     <Compile Update="Pages\ElMagnetPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\SatellitePage\SatellitePage1.xaml.cs">
+    <Compile Update="Pages\SatellitePage\SatellitePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

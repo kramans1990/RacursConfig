@@ -132,7 +132,7 @@
     <Page Update="Pages\SatellitePage\PositionEditors\SunSensorPositionEditor.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\SatellitePage\SatellitePage1.xaml">
+    <Page Update="Pages\SatellitePage\SatellitePage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SatellitePage\SatellitteComponetsEditor.xaml">

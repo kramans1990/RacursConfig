@@ -19,9 +19,9 @@ namespace RacursConfig.Pages.SatellitePage
     /// <summary>
     /// Логика взаимодействия для SatellitesPage.xaml
     /// </summary>
-    public partial  class SatellitePage1 : Page
+    public partial  class SatellitePage : Page
     {
-        public SatellitePage1()
+        public SatellitePage()
         {
             InitializeComponent();
             DataContext = new SatellitePageVM();
