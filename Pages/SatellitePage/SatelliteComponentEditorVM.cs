@@ -1,20 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿
 using RacursCore.SatilliteComponents;
-using RacursCore.types;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Windows;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using System.Text.Json;
 using RacursCore;
-
 using RacursCore.SatelliteModel;
-using RacursConfig.Models;
 using RacursConfig.Pages.SatellitePage.PositionEditors;
-using RacursConfig.Pages;
+
 
 namespace RacursConfig.Pages.SatellitePage
 {
@@ -122,10 +115,7 @@ namespace RacursConfig.Pages.SatellitePage
         {
             get; set;
         }
-        public RelayCommand CancelCommand
-        {
-            get; set;
-        }
+       
         public SatelliteComponentEditorVM(Satellite satellite)
         {
      
@@ -665,38 +655,7 @@ namespace RacursConfig.Pages.SatellitePage
                     break;
             }
         }
-        private bool canSave()
-        {
-            //DependencyObject do_ = (Application.Current.MainWindow);
-            //var frame = FindVisualChildren<Frame>((do_));
-            //List<NumberField> fieldsNum = FindVisualChildren<NumberField>(frame.First()).ToList();
-            //var find_FalseNum = fieldsNum.Where(p => p.IsValid == false);
-            //bool result = find_FalseNum.Count() == 0 ? true : false;
-
-            //if (!result)
-            //{
-            //    return result;
-            //}
-
-            //List<TextField> fieldsText = FindVisualChildren<TextField>(frame.First()).ToList();
-            //var find_FalseText = fieldsText.Where(p => p.IsValid == false);
-            //bool resultText = find_FalseText.Count() == 0 ? true : false;
-
-            //return resultText;
-            return true;
-        }
-
-       
-
-       
-
-      
-    
-      
      
-   
-     
-  
 
     }
 

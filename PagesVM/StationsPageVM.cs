@@ -112,57 +112,6 @@ namespace Client.PagesVM
             }
         }
 
-
-     
-
-        //public RelayCommand AddCommand
-        //{
-        //    get;
-        //}
-        //public RelayCommand CancelCommand
-        //{
-        //    get;
-        //}
-        //public RelayCommand SaveCommand
-        //{
-        //    get;
-        //}
-        //public RelayCommand DeleteCommand
-        //{
-        //    get;
-        //}
-        //public RelayCommand EditCommand
-        //{
-        //    get;
-        //}
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = String.Empty;
-                switch (columnName)
-                {
-                    case "Angle":
-                        if ((StationEditor.Angle < 0) || (StationEditor.Angle > 100))
-                        {
-                            error = "Возраст должен быть больше 0 и меньше 100";
-                        }
-                        break;
-                    case "Name":
-                        //Обработка ошибок для свойства Name
-                        break;
-                    case "Position":
-                        //Обработка ошибок для свойства Position
-                        break;
-                }
-                return error;
-            }
-        }
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
         public StationsPageVM()
         {
 

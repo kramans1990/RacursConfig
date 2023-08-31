@@ -15,9 +15,7 @@ using RacursConfig.Controls;
 using System.Collections.ObjectModel;
 using Vector = RacursCore.types.Vector;
 using RacursCore;
-using RacursConfig.Pages;
 using RacursCore.SatelliteModel;
-using RacursConfig.Models;
 using RacursLib.LibMath;
 using RacursConfig.Pages.SatellitePage;
 
