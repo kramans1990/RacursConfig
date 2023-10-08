@@ -62,9 +62,9 @@ namespace RacursConfig.Pages.SatellitePage.PositionEditors
             AxisG.X = Convert.ToDouble(gx.Text);
             AxisG.Y = Convert.ToDouble(gy.Text);
             AxisG.Z = Convert.ToDouble(gz.Text);
-            AxisR.X = Convert.ToDouble(gx.Text);
-            AxisR.Y = Convert.ToDouble(gy.Text);
-            AxisR.Z = Convert.ToDouble(gz.Text);
+            AxisR.X = Convert.ToDouble(rx.Text);
+            AxisR.Y = Convert.ToDouble(ry.Text);
+            AxisR.Z = Convert.ToDouble(rz.Text);
             Theta = Convert.ToDouble(etaField.Text);
             Lambda = Convert.ToDouble(GammaField.Text);
             this.DialogResult = true;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacursConfig.Pages.SatellitePage.PositionEditors" xmlns:controls="clr-namespace:RacursConfig.Controls"
         mc:Ignorable="d"
-        Title="EngineEditor" MinHeight="250" MinWidth="500" MaxHeight="250" MaxWidth="500"  WindowStyle="ToolWindow">
+        Title="Установочные параметры" MinHeight="380" MinWidth="500" MaxHeight="380" MaxWidth="500"  WindowStyle="ToolWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
@@ -15,7 +15,10 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
-           
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>      
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -23,13 +26,16 @@
             <ColumnDefinition Width="160"></ColumnDefinition> 
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center">Параметры КДУ</TextBlock>
+        <TextBlock Grid.ColumnSpan="7" HorizontalAlignment="Center">Установочные параметры</TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">Удельный импульс:</TextBlock>
         <controls:NumberField x:Name="pulse" RangeValidation="True" ValidationMin="0" ValidationMax="1000" Grid.Row="2" Grid.Column="2" ></controls:NumberField>
         <TextBlock Grid.Row="4" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">Время работы (макс.):</TextBlock>
         <controls:NumberField x:Name="time" RangeValidation="True" ValidationMin="0" ValidationMax="86400" Grid.Row="4" Grid.Column="2" ></controls:NumberField>
-
-        <Button Width="140" Style="{StaticResource button-primary}"  Grid.Row="7" Grid.Column="1" Command="{Binding OKCommand}">OK</Button>
-        <Button  Width="140" Style="{StaticResource button-primary}" Grid.Row="7" Grid.Column="2"  Command="{Binding CancelCommand}" Cursor="Hand">Отмена</Button>
+        <TextBlock Grid.Row="6" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">Тяга:</TextBlock>
+        <controls:NumberField x:Name="pull" RangeValidation="True" ValidationMin="0" ValidationMax="100" Grid.Row="6" Grid.Column="2" ></controls:NumberField>
+        <TextBlock Grid.Row="8" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">Удельная тяга:</TextBlock>
+        <controls:NumberField x:Name="pullUnit" RangeValidation="True" ValidationMin="0" ValidationMax="100" Grid.Row="8" Grid.Column="2" ></controls:NumberField>
+        <Button Width="140" Style="{StaticResource button-primary}"  Grid.Row="10" Grid.Column="1" Command="{Binding OKCommand}">OK</Button>
+        <Button  Width="140" Style="{StaticResource button-primary}" Grid.Row="10" Grid.Column="2"  Command="{Binding CancelCommand}" Cursor="Hand">Отмена</Button>
     </Grid>
 </Window>

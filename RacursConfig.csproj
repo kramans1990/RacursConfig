@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +31,7 @@
       <HintPath>..\Ракурс\Git\Racurs\Client\bin\Debug\net5.0-windows\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RacursCore">
-      <HintPath>..\Ракурс\Git\racurs-be\RacursCore\bin\Debug\netstandard2.1\RacursCore.dll</HintPath>
+      <HintPath>..\Ракурс\Git\RacursCore\bin\Release\netstandard2.1\RacursCore.dll</HintPath>
     </Reference>
     <Reference Include="RacursLib">
       <HintPath>..\Ракурс\Git\Racurs\RacursLib\bin\Debug\netstandard2.0\RacursLib.dll</HintPath>

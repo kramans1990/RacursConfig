@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacursConfig.Pages.SatellitePage" xmlns:controls="clr-namespace:RacursConfig.Controls"
         mc:Ignorable="d"
-        Title="VectorEditor"  MinHeight="550" MinWidth="700" MaxHeight="550" MaxWidth="700"  WindowStyle="ToolWindow">
+        Title ="Установочные параметры" MinHeight="550" MinWidth="700" MaxHeight="550" MaxWidth="700"  WindowStyle="ToolWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
@@ -15,7 +15,7 @@
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="300"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,6 +28,7 @@
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="7" HorizontalAlignment="Center">Установочные параметры</TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="1">X:</TextBlock>
         <controls:NumberField x:Name="x" RangeValidation="True" ValidationMin="-1" ValidationMax="1" Grid.Row="2" Grid.Column="2" ></controls:NumberField>
         <TextBlock Grid.Row="2"  HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="3">Y:</TextBlock>

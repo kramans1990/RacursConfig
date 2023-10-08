@@ -8,11 +8,11 @@
        
         Title="SatellitteComponetsEditor"  WindowState="Maximized">
     <Window.Resources>
-        <local:SmallWheelsToTextConverter x:Key="smallWheelsToTextConverter"/>
-        <local:SmallWheelsToColorConverter x:Key="smallWheelsToColorConverter"/>
-        <local:SmallWheelsToEnabledConverter x:Key="smallWheelsToEnabledConverter"/>
-        <local:WheelToColorConverter x:Key="wheelToColorConverter"/>
-        <local:ComponentToVisibilityConverter x:Key="componentToVisibilityConverter"/>
+        <local:DeviceToTextConverter x:Key="deviceToTextConverter"/>
+        <local:DeviceToColorConverter x:Key="deviceToColorConverter"/>
+        <local:DeviceToEnableConverter x:Key="deviceToEnableConverter"/>
+        <local:SmallWheelsToEnabledConverter x:Key="smallWheelsToEnabledConverter"/>       
+        <local:DeviceToVisibilityConverter x:Key="deviceToVisibilityConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -117,15 +117,15 @@
             </Border>
 
             <!--ЗД-->
-            <Rectangle  Canvas.Top="378" Canvas.Left="270"    Height="241" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
-            <Rectangle  Canvas.Top="378" Canvas.Left="238"    Height="5" Width="32"  Style="{StaticResource SatItemConnection}"></Rectangle>
+            <Rectangle  Canvas.Top="420" Canvas.Left="270"    Height="180" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
+            <Rectangle  Canvas.Top="418" Canvas.Left="238"    Height="5" Width="38"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Border  Canvas.Top="300" Canvas.Left="40" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.StarSensor1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.StarSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">Star1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -135,24 +135,25 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensor1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteStarSensorCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor1}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="StarSensor-1"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="StarSensor-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensor1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor1}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensor1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.StarSensor1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="StarSensor-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensor1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
 
             </Border>
             <Border  Canvas.Top="360" Canvas.Left="40" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.StarSensor2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.StarSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">Star2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -162,23 +163,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensor2, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteStarSensorCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor2}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="StarSensor-2"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="StarSensor-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensor2, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor2}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensor2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.StarSensor2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="StarSensor-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensor2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="420" Canvas.Left="40" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.StarSensor3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.StarSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">Star3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -188,24 +190,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensor3, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteStarSensorCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor3}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="StarSensor-3"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="StarSensor-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensor3, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor3}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensor3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.StarSensor3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="StarSensor-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensor3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="480" Canvas.Left="40" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.StarSensor4.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.StarSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=4}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">StarS4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-4}">Star4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -215,14 +217,15 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensor4, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteStarSensorCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor4}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding DeleteComponentCommand}" CommandParameter="StarSensor-4"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="StarSensor-4"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensor4, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.StarSensor4}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensor4, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.StarSensor4.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding EditStarSensorPositionCommand}" CommandParameter="4"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.StarSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" 
+                                  IsChecked="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=4, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="StarSensor-4">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensor4.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.StarSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=4}"></TextBlock>
                 </Grid>
 
             </Border>
@@ -233,12 +236,12 @@
             <Rectangle  Canvas.Top="378" Canvas.Left="1138"    Height="5" Width="42"  Style="{StaticResource SatItemConnection}"></Rectangle>
 
             <Border  Canvas.Top="200" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">Sun1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -248,23 +251,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor1}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-1"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor1}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="260" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">Sun2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -274,24 +278,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor2, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor2}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-2"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor2, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor2}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="320" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">Sun3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -301,23 +305,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor3, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor3}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-3"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor3, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor3}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="380" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor4.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=4}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-4}">Sun4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -327,24 +332,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor4, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor4}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-4"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-4"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor4, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor4}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor4, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor4.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="4"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=4, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-4">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor4.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=4}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="440" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor5.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor5,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS5</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-5}">Sun5</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -354,23 +359,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor5, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor5}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=5}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-5"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-5"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor5, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor5}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor5, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor5.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=5}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="5"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=5}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=5, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-5">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor5.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=5}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="500" Canvas.Left="940" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.SunSensor6.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SunSensors ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=6}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensor6,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">SunS6</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-6}">Sun6</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -380,32 +386,29 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensor6, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSunSensorCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor6}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=6}" Command="{Binding DeleteComponentCommand}" CommandParameter="SunSensor-6"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="SunSensor-6"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensor6, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="{Binding SatelliteEditor.SunSensor6}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensor6, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.SunSensor6.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=6}" Command="{Binding EditSunSensorPositionCommand}" CommandParameter="6"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SunSensors, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=6}" 
+                                  IsChecked="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=6, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="SunSensor-6">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensor6.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SunSensors , Converter={StaticResource deviceToTextConverter},ConverterParameter=6}"></TextBlock>
                 </Grid>
-            </Border>
-          
-            
-           
-          
-         
+            </Border>    
 
             <!--smallWheels-->
             <Rectangle  Canvas.Top="138" Canvas.Left="370"    Height="462" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Rectangle  Canvas.Top="138" Canvas.Left="338"    Height="5" Width="32"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Border  Canvas.Top="20" Canvas.Left="140" Style="{StaticResource SatItem}">
-            <Grid Background="{Binding SatelliteEditor.Ssat1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SmallWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                   
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">Ssat1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -415,24 +418,25 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Ssat1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding DeleteSmallSatCommand}" CommandParameter="{Binding SatelliteEditor.Ssat1}"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="Ssat-1"  Grid.Row="0" Grid.Column="0" ></Button>
                         <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Ssat-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Ssat1, Converter={StaticResource componentToVisibilityConverter}}" Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Ssat1}"   Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Ssat1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Ssat1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
-
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditSmallSatPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Ssat-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Ssat1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="80" Canvas.Left="140" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Ssat2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SmallWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">Ssat2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -442,23 +446,25 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteSmallSatCommand}" CommandParameter="{Binding SatelliteEditor.Ssat2}"   Visibility="{Binding SatelliteEditor.Ssat2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Ssat-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Ssat2}" Visibility="{Binding SatelliteEditor.Ssat2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Ssat2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Ssat2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="Ssat-2"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Ssat-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}"  Command="{Binding EditSmallSatPositionCommand}" CommandParameter="2"    Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Ssat-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Ssat2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="140" Canvas.Left="140" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Ssat3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.SmallWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">Ssat3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -468,23 +474,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteSmallSatCommand}" CommandParameter="{Binding SatelliteEditor.Ssat3}"   Visibility="{Binding SatelliteEditor.Ssat3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Ssat-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Ssat3}" Visibility="{Binding SatelliteEditor.Ssat3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Ssat3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Ssat3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="Ssat-3"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Ssat-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditSmallSatPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Ssat-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Ssat3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="200" Canvas.Left="140" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Ssat4.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.SmallWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=4}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Ssat4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Ssat4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-4}">Ssat4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -494,13 +501,15 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteSmallSatCommand}" CommandParameter="{Binding SatelliteEditor.Ssat4}"   Visibility="{Binding SatelliteEditor.Ssat4, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Ssat-4"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Ssat4}" Visibility="{Binding SatelliteEditor.Ssat4, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Ssat4, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Ssat4.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding DeleteComponentCommand}" CommandParameter="Ssat-4"   Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Ssat-4"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding EditSmallSatPositionCommand}" CommandParameter="4"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.SmallWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" 
+                                  IsChecked="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=4, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Ssat-4">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Ssat4.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.SmallWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=4}"></TextBlock>
                 </Grid>
 
             </Border>
@@ -509,13 +518,13 @@
             <Rectangle  Canvas.Top="138" Canvas.Left="370"    Height="462" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Rectangle  Canvas.Top="138" Canvas.Left="338"    Height="5" Width="64"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Border  Canvas.Top="20" Canvas.Left="400" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Msat1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.MicroWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Msat1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Msat1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">Msat1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -525,23 +534,25 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMicroSatCommand}" CommandParameter="{Binding SatelliteEditor.Msat1}"   Visibility="{Binding SatelliteEditor.Msat1, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Msat-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Msat1}" Visibility="{Binding SatelliteEditor.Msat1, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Msat1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Msat1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="Msat-1"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Msat-1"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditMicroSatPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Msat-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Msat1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
-               </Border>
+            </Border>
             <Border  Canvas.Top="80" Canvas.Left="400" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Msat2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.MicroWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Msat2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Msat2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">Msat2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -551,24 +562,25 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMicroSatCommand}" CommandParameter="{Binding SatelliteEditor.Msat2}"   Visibility="{Binding SatelliteEditor.Msat2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Msat-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Msat2}" Visibility="{Binding SatelliteEditor.Msat2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Msat2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Msat2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="Msat-2"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Msat-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditMicroSatPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Msat-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Msat2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="140" Canvas.Left="400" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Msat3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.MicroWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Msat3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Msat3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">Msat3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -578,23 +590,26 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMicroSatCommand}" CommandParameter="{Binding SatelliteEditor.Msat3}"   Visibility="{Binding SatelliteEditor.Msat3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Msat-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Msat3}" Visibility="{Binding SatelliteEditor.Msat3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Msat3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Msat3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="Msat-3"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Msat-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditMicroSatPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Msat-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Msat3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
+
             </Border>
             <Border  Canvas.Top="200" Canvas.Left="400" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Msat4.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.MicroWheels ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=4}">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Msat4,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">Msat4</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-4}">Msat4</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -604,13 +619,15 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMicroSatCommand}" CommandParameter="{Binding SatelliteEditor.Msat4}"   Visibility="{Binding SatelliteEditor.Msat4, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Msat-4"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditSmallSatPositionCommand}" CommandParameter="{Binding SatelliteEditor.Msat4}" Visibility="{Binding SatelliteEditor.Msat4, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Msat4, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Msat4.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding DeleteComponentCommand}" CommandParameter="Msat-4"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Msat-4"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" Command="{Binding EditMicroSatPositionCommand}" CommandParameter="4"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.MicroWheels, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=4}" 
+                                  IsChecked="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=4, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Msat-4">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Msat4.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MicroWheels , Converter={StaticResource deviceToTextConverter},ConverterParameter=4}"></TextBlock>
                 </Grid>
 
             </Border>
@@ -620,13 +637,12 @@
             <Rectangle  Canvas.Top="470" Canvas.Left="470"    Height="5" Width="30"  Style="{StaticResource SatItemConnection}"></Rectangle>
 
             <Border  Canvas.Top="380" Canvas.Left="500" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.MTM1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.Magnetometers ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MTM1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">MTM1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -636,24 +652,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMagnetometerCommand}" CommandParameter="{Binding SatelliteEditor.MTM1}"   Visibility="{Binding SatelliteEditor.MTM1, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="{Binding SatelliteEditor.MTM1}" Visibility="{Binding SatelliteEditor.MTM1, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.MTM1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.MTM1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="Magnetometer-1"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-1"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Magnetometer-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MTM1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="440" Canvas.Left="500" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.MTM2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.Magnetometers ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MTM2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">MTM3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -663,23 +679,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMagnetometerCommand}" CommandParameter="{Binding SatelliteEditor.MTM2}"   Visibility="{Binding SatelliteEditor.MTM2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="{Binding SatelliteEditor.MTM2}" Visibility="{Binding SatelliteEditor.MTM2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.MTM2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.MTM2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="Magnetometer-2"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Magnetometer-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MTM2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
             </Border>
             <Border  Canvas.Top="500" Canvas.Left="500" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.MTM3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.Magnetometers ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.MTM3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">MTM3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">MTM2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -689,13 +706,15 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteMagnetometerCommand}" CommandParameter="{Binding SatelliteEditor.MTM3}"   Visibility="{Binding SatelliteEditor.MTM3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="{Binding SatelliteEditor.MTM3}" Visibility="{Binding SatelliteEditor.MTM3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.MTM3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.MTM3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="Magnetometer-3"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Magnetometer-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditMagnetometerPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Magnetometers, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Magnetometer-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.MTM3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Magnetometers , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
             </Border>
 
@@ -704,13 +723,12 @@
             <Rectangle  Canvas.Top="230" Canvas.Left="840"    Height="5" Width="30"  Style="{StaticResource SatItemConnection}"></Rectangle>
 
             <Border  Canvas.Top="140" Canvas.Left="640" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ElMagnet1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.ElMagnets ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">EM1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -720,24 +738,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteElMagnetCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet1}"   Visibility="{Binding SatelliteEditor.ElMagnet1, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditElMagnetPositionCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet1}" Visibility="{Binding SatelliteEditor.ElMagnet1, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ElMagnet1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ElMagnet1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="ElMagnet-1"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-1"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditElMagnetPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ElMagnet-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnet1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="200" Canvas.Left="640" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ElMagnet2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-
+                <Grid Background="{Binding SatelliteEditor.ElMagnets ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">EM2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -747,23 +765,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteElMagnetCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet2}"   Visibility="{Binding SatelliteEditor.ElMagnet2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditElMagnetPositionCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet2}" Visibility="{Binding SatelliteEditor.ElMagnet2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ElMagnet2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ElMagnet2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="ElMagnet-2"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditElMagnetPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ElMagnet-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnet2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="260" Canvas.Left="640" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ElMagnet3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.ElMagnets ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnet3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">EM3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">EM3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -773,30 +792,29 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteElMagnetCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet3}"   Visibility="{Binding SatelliteEditor.ElMagnet3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditElMagnetPositionCommand}" CommandParameter="{Binding SatelliteEditor.ElMagnet3}" Visibility="{Binding SatelliteEditor.ElMagnet3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ElMagnet3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ElMagnet3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="ElMagnet-3"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ElMagnet-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditElMagnetPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ElMagnets, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ElMagnet-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnet3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ElMagnets , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
-
             </Border>
 
 
             <!--GR-->
             <Rectangle  Canvas.Top="470" Canvas.Left="1250"    Height="140" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
-            <Rectangle  Canvas.Top="470" Canvas.Left="1250"    Height="5" Width="30"  Style="{StaticResource SatItemConnection}"></Rectangle>
-
-           
+            <Rectangle  Canvas.Top="470" Canvas.Left="1250"    Height="5" Width="30"  Style="{StaticResource SatItemConnection}"></Rectangle>           
             <Border  Canvas.Top="380" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Gyro1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.Gyros ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyro1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">GR1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">Gyro1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -806,24 +824,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteGyroCommand}" CommandParameter="{Binding SatelliteEditor.Gyro1}"   Visibility="{Binding SatelliteEditor.Gyro1, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Gyro-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditGyroPositionCommand}" CommandParameter="{Binding SatelliteEditor.Gyro1}" Visibility="{Binding SatelliteEditor.Gyro1, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Gyro1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Gyro1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="Gyro-1"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Gyro-1"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditGyroPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Gyro-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyro1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
-
             </Border>
-
             <Border  Canvas.Top="440" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Gyro2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.Gyros ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyro2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">GR2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">Gyro2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -833,23 +851,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteGyroCommand}" CommandParameter="{Binding SatelliteEditor.Gyro2}"   Visibility="{Binding SatelliteEditor.Gyro2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Gyro-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditGyroPositionCommand}" CommandParameter="{Binding SatelliteEditor.Gyro2}" Visibility="{Binding SatelliteEditor.Gyro2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Gyro2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Gyro2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="Gyro-2"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Gyro-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditGyroPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Gyro-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyro2.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
                 </Grid>
-
             </Border>
             <Border  Canvas.Top="500" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.Gyro3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.Gyros ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyro3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">GR3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">Gyro3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -859,27 +878,27 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteGyroCommand}" CommandParameter="{Binding SatelliteEditor.Gyro3}"   Visibility="{Binding SatelliteEditor.Gyro3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="Gyro-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditGyroPositionCommand}" CommandParameter="{Binding SatelliteEditor.Gyro3}" Visibility="{Binding SatelliteEditor.Gyro3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.Gyro3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.Gyro3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="Gyro-3"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="Gyro-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditGyroPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.Gyros, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="Gyro-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyro3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.Gyros , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
-
-            </Border>
+             </Border>
             <!--ARS-->
-
             <Rectangle  Canvas.Top="230" Canvas.Left="1521"    Height="380" Width="5"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Rectangle  Canvas.Top="230" Canvas.Left="1480"    Height="5" Width="42"  Style="{StaticResource SatItemConnection}"></Rectangle>
             <Border  Canvas.Top="140" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ARS1.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.ARS ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=1}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS1,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ARS1</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-1}">ARS1</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -889,24 +908,24 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteARSCommand}" CommandParameter="{Binding SatelliteEditor.ARS1}"   Visibility="{Binding SatelliteEditor.ARS1, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ARS-1"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditARSPositionCommand}" CommandParameter="{Binding SatelliteEditor.ARS1}" Visibility="{Binding SatelliteEditor.ARS1, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ARS1, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ARS1.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding DeleteComponentCommand}" CommandParameter="ARS-1"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ARS-1"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" Command="{Binding EditARSPositionCommand}" CommandParameter="1"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=1}" 
+                                  IsChecked="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=1, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ARS-1">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS1.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToTextConverter},ConverterParameter=1}"></TextBlock>
                 </Grid>
-
-            </Border>
-           
+            </Border>           
             <Border  Canvas.Top="200" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ARS2.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.ARS ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=2}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS2,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ARS2</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-2}">ARS2</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -916,23 +935,23 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteARSCommand}" CommandParameter="{Binding SatelliteEditor.ARS2}"   Visibility="{Binding SatelliteEditor.ARS2, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ARS-2"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditARSPositionCommand}" CommandParameter="{Binding SatelliteEditor.ARS2}" Visibility="{Binding SatelliteEditor.ARS2, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ARS2, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ARS2.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding DeleteComponentCommand}" CommandParameter="ARS-2"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ARS-2"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" Command="{Binding EditARSPositionCommand}" CommandParameter="2"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=2}" 
+                                  IsChecked="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ARS-2">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS2.Name}"></TextBlock>
-                </Grid>
-
-            </Border>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToTextConverter},ConverterParameter=2}"></TextBlock>
+                </Grid> </Border>
             <Border  Canvas.Top="260" Canvas.Left="1280" Style="{StaticResource SatItem}">
-                <Grid Background="{Binding SatelliteEditor.ARS3.IsEnable ,Converter={StaticResource wheelToColorConverter}, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                <Grid Background="{Binding SatelliteEditor.ARS ,Converter={StaticResource deviceToColorConverter} , ConverterParameter=3}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="50"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS3,Converter={StaticResource componentToVisibilityConverter} , ConverterParameter =invert}">ARS3</TextBlock>
+                    <TextBlock Style="{StaticResource backgroud-text}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=-3}">ARS3</TextBlock>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -942,15 +961,16 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button  Style="{StaticResource button-delete-item}"       Command="{Binding DeleteARSCommand}" CommandParameter="{Binding SatelliteEditor.ARS3}"   Visibility="{Binding SatelliteEditor.ARS3, Converter={StaticResource componentToVisibilityConverter}}"  Grid.Row="0" Grid.Column="0" ></Button>
-                        <Button  Style="{StaticResource button-edit-component}"    Command="{Binding AddComponentCommand}" CommandParameter="ARS-3"   Grid.Row="0" Grid.Column="1"></Button>
-                        <Button  Style="{StaticResource button-edit-item-angle}"   Command="{Binding EditARSPositionCommand}" CommandParameter="{Binding SatelliteEditor.ARS3}" Visibility="{Binding SatelliteEditor.ARS3, Converter={StaticResource componentToVisibilityConverter}}"    Grid.Row="1" Grid.Column="2"></Button>
-                        <CheckBox Style="{StaticResource component-enable}"     Visibility="{Binding SatelliteEditor.ARS3, Converter={StaticResource componentToVisibilityConverter}}" IsChecked="{Binding SatelliteEditor.ARS3.IsEnable, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0" >
+                        <Button  Style="{StaticResource button-delete-item}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding DeleteComponentCommand}" CommandParameter="ARS-3"  Grid.Row="0" Grid.Column="0" ></Button>
+                        <Button  Style="{StaticResource button-edit-component}" Command="{Binding AddComponentCommand}" CommandParameter="ARS-3"   Grid.Row="0" Grid.Column="1"></Button>
+                        <Button  Style="{StaticResource button-edit-item-angle}" Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" Command="{Binding EditARSPositionCommand}" CommandParameter="3"   Grid.Row="1" Grid.Column="2"></Button>
+                        <CheckBox Style="{StaticResource component-enable}"  Visibility="{Binding SatelliteEditor.ARS, Converter={StaticResource deviceToVisibilityConverter},ConverterParameter=3}" 
+                                  IsChecked="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToEnableConverter}, ConverterParameter=3, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Grid.Row="1" Grid.Column="0"
+                                  Command="{Binding EnableDeviceCommand}" CommandParameter="ARS-3">
                         </CheckBox>
                     </Grid>
-                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS3.Name}"></TextBlock>
+                    <TextBlock Style="{StaticResource component-name}" Text="{Binding SatelliteEditor.ARS , Converter={StaticResource deviceToTextConverter},ConverterParameter=3}"></TextBlock>
                 </Grid>
-
             </Border>
 
             <Button Canvas.Left="40" Canvas.Bottom="40" Height="50" Style="{StaticResource button-primary}"  Width ="140" Content="ОК" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=Editor}"></Button>

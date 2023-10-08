@@ -28,7 +28,7 @@
 
         <Label HorizontalAlignment="Center" Grid.Row="0">Список Электромагнитов</Label>
         <GridSplitter Margin="0,30,0,0"></GridSplitter>
-        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedElMagnet}" ItemsSource="{Binding ElMagnets}">
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedElMagnet}" ItemsSource="{Binding ElMagnets}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="150" Header="Название" Binding="{Binding Name}" />
                 <DataGridTextColumn Width="190" Header="Описание" Binding="{Binding Description}"/>

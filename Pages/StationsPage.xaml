@@ -26,7 +26,7 @@
 
         <Label HorizontalAlignment="Center" Grid.Row="0">Список Станций</Label>
         <GridSplitter Margin="0,30,0,0"></GridSplitter>
-        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False"  SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedStation}" ItemsSource="{Binding Stations}">
+        <DataGrid  Background="White" Grid.Row="1" IsReadOnly="True" CanUserAddRows="False"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedStation}" ItemsSource="{Binding Stations}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="150" Header="Название" Binding="{Binding Name}" />
                 <DataGridTextColumn Width="150" Header="Описание" Binding="{Binding Description}"/>

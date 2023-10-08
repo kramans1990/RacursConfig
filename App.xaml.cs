@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace RacursConfig
 {
@@ -15,7 +9,7 @@ namespace RacursConfig
     {   
        
         
-       public static string baseUrl = "https://localhost:44305";
-     // public static string baseUrl = "http://192.168.1.142";
+    //public static string baseUrl = "https://localhost:44305";
+     public static string baseUrl = "http://192.168.1.142";
     }
 }

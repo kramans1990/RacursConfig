@@ -52,6 +52,9 @@
     <Compile Update="Pages\SatellitePage\PositionEditors\MagnetometerPositionEditor.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\SatellitePage\PositionEditors\SatelliteModesEditor.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\SatellitePage\PositionEditors\StarSensorPositionEditor.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -124,6 +127,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SatellitePage\PositionEditors\MagnetometerPositionEditor.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SatellitePage\PositionEditors\SatelliteModesEditor.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\SatellitePage\PositionEditors\StarSensorPositionEditor.xaml">

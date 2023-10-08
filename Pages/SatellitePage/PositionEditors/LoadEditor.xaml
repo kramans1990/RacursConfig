@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RacursConfig.Pages.SatellitePage.PositionEditors" xmlns:controls="clr-namespace:RacursConfig.Controls"
         mc:Ignorable="d"
-        Title="LoadEitor"  MinHeight="250" MinWidth="700" MaxHeight="250" MaxWidth="700"  WindowStyle="ToolWindow">
+        Title="Установочные параметры"  MinHeight="250" MinWidth="700" MaxHeight="250" MaxWidth="700"  WindowStyle="ToolWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
@@ -16,8 +16,7 @@
             <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-           
+            <RowDefinition Height="40"></RowDefinition>          
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -30,6 +29,7 @@
             <ColumnDefinition Width="160"></ColumnDefinition>
             <ColumnDefinition Width="60"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="7" HorizontalAlignment="Center">Установочные параметры</TextBlock>
         <TextBlock Grid.Column="0" Grid.ColumnSpan="9" HorizontalAlignment="Center">Параметры ЦА</TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" HorizontalAlignment="Center">Вектор 1:</TextBlock>
         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Column="1">X:</TextBlock>

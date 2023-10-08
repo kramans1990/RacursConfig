@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RacursConfig.Pages" xmlns:controls="clr-namespace:RacursConfig.Controls" xmlns:src="clr-namespace:RacursConfig.Pages.SatellitePage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="850" d:DesignWidth="1800"
       
       Title="SatellitesPage" Background="#EAEDF0" >
 
@@ -63,13 +63,13 @@
         <StackPanel Grid.Row="2" Height="60" Orientation="Horizontal">
             <Button Style="{StaticResource button-primary}" Grid.Row="1"  Width="120"  Height="40" Margin="40,2,2,0" Content="Добавить" Command="{Binding AddCommand}"></Button>  
         </StackPanel>
-        <StackPanel Grid.Row="3">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Auto">
+            
                 <Grid Visibility="{Binding EditorVisibility}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="130"></ColumnDefinition>
-                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="25"></ColumnDefinition>
                         <ColumnDefinition Width="130"></ColumnDefinition>
                         <ColumnDefinition Width="20"></ColumnDefinition>
                         <ColumnDefinition Width="160"></ColumnDefinition>
@@ -117,6 +117,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="2" Text="Название"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="3" Text="Описание"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="Масса, Кг"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" Text="Текущая Масса, Кг"></TextBlock>
                     <TextBlock Grid.Column="1" Grid.Row="6" Text="Тип"></TextBlock>
 
                     <TextBlock Grid.Column="10" Grid.Row="0" Text="a,см"></TextBlock>
@@ -145,7 +146,7 @@
                     <controls:TextField    Grid.Column="3" Grid.Row="2" Text="{Binding SatelliteEditor.Name,Mode=TwoWay}" MinLength="0"></controls:TextField>
                     <controls:TextField    Grid.Column="3" Grid.ColumnSpan="6" Grid.Row="3" Text="{Binding SatelliteEditor.Description,Mode=TwoWay}" MinLength="10"></controls:TextField>
                     <controls:NumberField  Grid.Column="3"  Grid.Row="4" Text="{Binding SatelliteEditor.Mass,Mode=TwoWay}"  ValidationMin="1" ValidationMax="99999" RangeValidation="True" ></controls:NumberField>
-
+                    <controls:NumberField  Grid.Column="3"  Grid.Row="5" Text="{Binding SatelliteEditor.CurrentMass,Mode=TwoWay}"  ValidationMin="1" ValidationMax="99999" RangeValidation="True" ></controls:NumberField>
 
 
                     <ComboBox SelectedValuePath="Content" SelectedValue="{Binding  Path= SatelliteEditor.SatelliteType ,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"  Grid.Row="6" Grid.Column="3">
@@ -200,11 +201,12 @@
                     <controls:NumberField Grid.Column="20" Grid.Row="3" Text="{Binding TI.N33,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" RangeValidation="False"></controls:NumberField>
 
                     <Button Grid.Row="13" Grid.RowSpan="2" Height="50" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="10" Grid.ColumnSpan="4" Margin="2" Content="Компоновка" Command="{Binding OpenSattelliteModelEdtorCommand}"></Button>
-                    <Button Grid.Row="16" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
+                <Button Grid.Row="13" Grid.RowSpan="2" Height="50" Style="{StaticResource button-primary}"  Width ="300"  Grid.Column="12" Grid.ColumnSpan="5" Margin="100,2,2,2" Content="Конфигурация режимов работы" Command="{Binding OpenSattelliteModesEdtorCommand}"></Button>
+                <Button Grid.Row="16" Style="{StaticResource button-primary}"  Width ="120" Grid.Column="1" Margin="2" Content="Сохранить" Command="{Binding SaveCommand}"></Button>
                     <Button Grid.Row="16"  Style="{StaticResource button-primary}" Width ="120" Grid.Column="3" Margin="2" Content="Отмена" Command="{Binding CancelCommand}"></Button>
                 </Grid>
-            </ScrollViewer>
-        </StackPanel>
+          
+        </ScrollViewer>
 
 
         <ScrollViewer Grid.Row="4">

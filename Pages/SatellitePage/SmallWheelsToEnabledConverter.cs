@@ -21,16 +21,16 @@ namespace RacursConfig.Pages.SatellitePage
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            List<FlywheelModel> flyWheels = (List<FlywheelModel>)(value);
-            int param =  System.Convert.ToInt32(parameter.ToString());
-            var find = flyWheels.Find(p => p.Slot == param);
-            if (find != null)
-            {
-                if (find.IsEnable) {
-                    return true;
-                }
-                return false;
-            }
+            //List<FlywheelModel> flyWheels = (List<FlywheelModel>)(value);
+            //int param =  System.Convert.ToInt32(parameter.ToString());
+            //var find = flyWheels.Find(p => p.Slot == param);
+            //if (find != null)
+            //{
+            //    if (find.IsEnable) {
+            //        return true;
+            //    }
+            //    return false;
+            //}
             return false;
 
         }

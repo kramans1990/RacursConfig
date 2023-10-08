@@ -14,6 +14,7 @@ using System.Windows.Controls;
 using RacursConfig.Controls;
 using System.Collections.ObjectModel;
 using RacursLib.LibMath;
+using Matrix3 = RacursCore.types.Matrix3;
 
 namespace RacursConfig.PagesVM
 {
